@@ -1,0 +1,494 @@
+[
+  {
+    "trainNumber": "22436",
+    "trainName": "Vande Bharat Express",
+    "trainType": "Vande Bharat",
+    "sourceStation": "NDLS",
+    "destinationStation": "BSB",
+    "departureTime": "06:00",
+    "arrivalTime": "14:00",
+    "duration": "08h 00m",
+    "distanceKm": 759,
+    "runsOnDays": [false, true, true, true, true, true, false],
+    "classes": [
+      { "classCode": "CC", "className": "AC Chair Car", "fare": 1750, "status": "AVAILABLE", "seatsCount": 84, "confirmedProbability": 98 },
+      { "classCode": "EC", "className": "Exec. Chair Car", "fare": 3300, "status": "AVAILABLE", "seatsCount": 18, "confirmedProbability": 99 }
+    ],
+    "route": [
+      { "stationCode": "NDLS", "stationName": "New Delhi", "arrival": "Source", "departure": "06:00", "haltMin": 0, "day": 1, "distanceKm": 0, "platform": "16" },
+      { "stationCode": "CNB", "stationName": "Kanpur Central", "arrival": "10:08", "departure": "10:10", "haltMin": 2, "day": 1, "distanceKm": 440, "platform": "1" },
+      { "stationCode": "PRYJ", "stationName": "Prayagraj Junction", "arrival": "12:08", "departure": "12:10", "haltMin": 2, "day": 1, "distanceKm": 635, "platform": "6" },
+      { "stationCode": "BSB", "stationName": "Varanasi Junction", "arrival": "14:00", "departure": "Destination", "haltMin": 0, "day": 1, "distanceKm": 759, "platform": "8" }
+    ]
+  },
+  {
+    "trainNumber": "12302",
+    "trainName": "Howrah Rajdhani Express",
+    "trainType": "Rajdhani",
+    "sourceStation": "NDLS",
+    "destinationStation": "HWH",
+    "departureTime": "16:50",
+    "arrivalTime": "09:55",
+    "duration": "17h 05m",
+    "distanceKm": 1451,
+    "runsOnDays": [true, true, true, true, true, true, true],
+    "classes": [
+      { "classCode": "1A", "className": "AC First Class", "fare": 4850, "status": "AVAILABLE", "seatsCount": 6, "confirmedProbability": 95 },
+      { "classCode": "2A", "className": "AC 2 Tier", "fare": 2980, "status": "RAC", "racCount": 14, "confirmedProbability": 82 },
+      { "classCode": "3A", "className": "AC 3 Tier", "fare": 2150, "status": "AVAILABLE", "seatsCount": 42, "confirmedProbability": 91 }
+    ],
+    "route": [
+      { "stationCode": "NDLS", "stationName": "New Delhi", "arrival": "Source", "departure": "16:50", "haltMin": 0, "day": 1, "distanceKm": 0, "platform": "12" },
+      { "stationCode": "CNB", "stationName": "Kanpur Central", "arrival": "21:32", "departure": "21:37", "haltMin": 5, "day": 1, "distanceKm": 440, "platform": "4" },
+      { "stationCode": "PRYJ", "stationName": "Prayagraj Junction", "arrival": "23:43", "departure": "23:45", "haltMin": 2, "day": 1, "distanceKm": 635, "platform": "4" },
+      { "stationCode": "DHN", "stationName": "Dhanbad Junction", "arrival": "05:45", "departure": "05:50", "haltMin": 5, "day": 2, "distanceKm": 1192, "platform": "1" },
+      { "stationCode": "HWH", "stationName": "Howrah Junction", "arrival": "09:55", "departure": "Destination", "haltMin": 0, "day": 2, "distanceKm": 1451, "platform": "9" }
+    ]
+  },
+  {
+    "trainNumber": "12952",
+    "trainName": "Mumbai Tejas Rajdhani",
+    "trainType": "Rajdhani",
+    "sourceStation": "NDLS",
+    "destinationStation": "MMCT",
+    "departureTime": "16:55",
+    "arrivalTime": "08:35",
+    "duration": "15h 40m",
+    "distanceKm": 1384,
+    "runsOnDays": [true, true, true, true, true, true, true],
+    "classes": [
+      { "classCode": "1A", "className": "AC First Class", "fare": 4910, "status": "AVAILABLE", "seatsCount": 8, "confirmedProbability": 96 },
+      { "classCode": "2A", "className": "AC 2 Tier", "fare": 3020, "status": "AVAILABLE", "seatsCount": 26, "confirmedProbability": 90 },
+      { "classCode": "3A", "className": "AC 3 Tier", "fare": 2190, "status": "WL", "wlCount": 18, "confirmedProbability": 64 }
+    ],
+    "route": [
+      { "stationCode": "NDLS", "stationName": "New Delhi", "arrival": "Source", "departure": "16:55", "haltMin": 0, "day": 1, "distanceKm": 0, "platform": "3" },
+      { "stationCode": "BPL", "stationName": "Bhopal Junction", "arrival": "23:15", "departure": "23:20", "haltMin": 5, "day": 1, "distanceKm": 702, "platform": "1" },
+      { "stationCode": "BRC", "stationName": "Vadodara Junction", "arrival": "03:44", "departure": "03:54", "haltMin": 10, "day": 2, "distanceKm": 992, "platform": "2" },
+      { "stationCode": "ST", "stationName": "Surat", "arrival": "05:13", "departure": "05:18", "haltMin": 5, "day": 2, "distanceKm": 1122, "platform": "1" },
+      { "stationCode": "MMCT", "stationName": "Mumbai Central", "arrival": "08:35", "departure": "Destination", "haltMin": 0, "day": 2, "distanceKm": 1384, "platform": "1" }
+    ]
+  },
+  {
+    "trainNumber": "12951",
+    "trainName": "Mumbai Tejas Rajdhani",
+    "trainType": "Rajdhani",
+    "sourceStation": "MMCT",
+    "destinationStation": "NDLS",
+    "departureTime": "17:00",
+    "arrivalTime": "08:32",
+    "duration": "15h 32m",
+    "distanceKm": 1384,
+    "runsOnDays": [true, true, true, true, true, true, true],
+    "classes": [
+      { "classCode": "1A", "className": "AC First Class", "fare": 4910, "status": "AVAILABLE", "seatsCount": 4, "confirmedProbability": 94 },
+      { "classCode": "2A", "className": "AC 2 Tier", "fare": 3020, "status": "AVAILABLE", "seatsCount": 35, "confirmedProbability": 92 },
+      { "classCode": "3A", "className": "AC 3 Tier", "fare": 2190, "status": "AVAILABLE", "seatsCount": 54, "confirmedProbability": 94 }
+    ],
+    "route": [
+      { "stationCode": "MMCT", "stationName": "Mumbai Central", "arrival": "Source", "departure": "17:00", "haltMin": 0, "day": 1, "distanceKm": 0, "platform": "1" },
+      { "stationCode": "ST", "stationName": "Surat", "arrival": "19:43", "departure": "19:48", "haltMin": 5, "day": 1, "distanceKm": 263, "platform": "1" },
+      { "stationCode": "BRC", "stationName": "Vadodara Junction", "arrival": "21:06", "departure": "21:16", "haltMin": 10, "day": 1, "distanceKm": 392, "platform": "2" },
+      { "stationCode": "NDLS", "stationName": "New Delhi", "arrival": "08:32", "departure": "Destination", "haltMin": 0, "day": 2, "distanceKm": 1384, "platform": "2" }
+    ]
+  },
+  {
+    "trainNumber": "12004",
+    "trainName": "Lucknow Shatabdi Express",
+    "trainType": "Shatabdi",
+    "sourceStation": "NDLS",
+    "destinationStation": "LKO",
+    "departureTime": "06:10",
+    "arrivalTime": "12:55",
+    "duration": "06h 45m",
+    "distanceKm": 512,
+    "runsOnDays": [true, true, true, true, true, true, true],
+    "classes": [
+      { "classCode": "CC", "className": "AC Chair Car", "fare": 1165, "status": "AVAILABLE", "seatsCount": 112, "confirmedProbability": 97 },
+      { "classCode": "EC", "className": "Exec. Chair Car", "fare": 2125, "status": "AVAILABLE", "seatsCount": 22, "confirmedProbability": 98 }
+    ],
+    "route": [
+      { "stationCode": "NDLS", "stationName": "New Delhi", "arrival": "Source", "departure": "06:10", "haltMin": 0, "day": 1, "distanceKm": 0, "platform": "11" },
+      { "stationCode": "CNB", "stationName": "Kanpur Central", "arrival": "11:20", "departure": "11:25", "haltMin": 5, "day": 1, "distanceKm": 440, "platform": "5" },
+      { "stationCode": "LKO", "stationName": "Lucknow Charbagh", "arrival": "12:55", "departure": "Destination", "haltMin": 0, "day": 1, "distanceKm": 512, "platform": "1" }
+    ]
+  },
+  {
+    "trainNumber": "20607",
+    "trainName": "Mysuru Vande Bharat",
+    "trainType": "Vande Bharat",
+    "sourceStation": "MAS",
+    "destinationStation": "SBC",
+    "departureTime": "05:50",
+    "arrivalTime": "10:25",
+    "duration": "04h 35m",
+    "distanceKm": 359,
+    "runsOnDays": [true, true, false, true, true, true, true],
+    "classes": [
+      { "classCode": "CC", "className": "AC Chair Car", "fare": 995, "status": "AVAILABLE", "seatsCount": 65, "confirmedProbability": 96 },
+      { "classCode": "EC", "className": "Exec. Chair Car", "fare": 1885, "status": "AVAILABLE", "seatsCount": 14, "confirmedProbability": 98 }
+    ],
+    "route": [
+      { "stationCode": "MAS", "stationName": "MGR Chennai Central", "arrival": "Source", "departure": "05:50", "haltMin": 0, "day": 1, "distanceKm": 0, "platform": "2A" },
+      { "stationCode": "SBC", "stationName": "KSR Bengaluru City", "arrival": "10:25", "departure": "Destination", "haltMin": 0, "day": 1, "distanceKm": 359, "platform": "7" }
+    ]
+  },
+  {
+    "trainNumber": "12245",
+    "trainName": "Howrah Yesvantpur Duronto",
+    "trainType": "Duronto",
+    "sourceStation": "HWH",
+    "destinationStation": "YPR",
+    "departureTime": "10:50",
+    "arrivalTime": "16:00",
+    "duration": "29h 10m",
+    "distanceKm": 1946,
+    "runsOnDays": [false, true, true, false, true, true, false],
+    "classes": [
+      { "classCode": "1A", "className": "AC First Class", "fare": 5420, "status": "AVAILABLE", "seatsCount": 4, "confirmedProbability": 93 },
+      { "classCode": "2A", "className": "AC 2 Tier", "fare": 3310, "status": "AVAILABLE", "seatsCount": 22, "confirmedProbability": 88 },
+      { "classCode": "3A", "className": "AC 3 Tier", "fare": 2360, "status": "RAC", "racCount": 20, "confirmedProbability": 79 },
+      { "classCode": "SL", "className": "Sleeper", "fare": 890, "status": "AVAILABLE", "seatsCount": 46, "confirmedProbability": 89 }
+    ],
+    "route": [
+      { "stationCode": "HWH", "stationName": "Howrah Junction", "arrival": "Source", "departure": "10:50", "haltMin": 0, "day": 1, "distanceKm": 0, "platform": "22" },
+      { "stationCode": "BBS", "stationName": "Bhubaneswar", "arrival": "16:20", "departure": "16:30", "haltMin": 10, "day": 1, "distanceKm": 437, "platform": "4" },
+      { "stationCode": "VSKP", "stationName": "Visakhapatnam Junction", "arrival": "22:05", "departure": "22:25", "haltMin": 20, "day": 1, "distanceKm": 880, "platform": "3" },
+      { "stationCode": "BZA", "stationName": "Vijayawada Junction", "arrival": "04:15", "departure": "04:25", "haltMin": 10, "day": 2, "distanceKm": 1230, "platform": "1" },
+      { "stationCode": "YPR", "stationName": "Yesvantpur Junction", "arrival": "16:00", "departure": "Destination", "haltMin": 0, "day": 2, "distanceKm": 1946, "platform": "1" }
+    ]
+  },
+  {
+    "trainNumber": "12393",
+    "trainName": "Sampoorna Kranti Express",
+    "trainType": "Superfast",
+    "sourceStation": "PNBE",
+    "destinationStation": "NDLS",
+    "departureTime": "19:25",
+    "arrivalTime": "07:55",
+    "duration": "12h 30m",
+    "distanceKm": 998,
+    "runsOnDays": [true, true, true, true, true, true, true],
+    "classes": [
+      { "classCode": "1A", "className": "AC First Class", "fare": 3810, "status": "AVAILABLE", "seatsCount": 6, "confirmedProbability": 97 },
+      { "classCode": "2A", "className": "AC 2 Tier", "fare": 2250, "status": "AVAILABLE", "seatsCount": 24, "confirmedProbability": 91 },
+      { "classCode": "3A", "className": "AC 3 Tier", "fare": 1580, "status": "AVAILABLE", "seatsCount": 78, "confirmedProbability": 93 },
+      { "classCode": "3E", "className": "AC 3 Economy", "fare": 1460, "status": "AVAILABLE", "seatsCount": 55, "confirmedProbability": 92 },
+      { "classCode": "SL", "className": "Sleeper", "fare": 520, "status": "WL", "wlCount": 42, "confirmedProbability": 52 }
+    ],
+    "route": [
+      { "stationCode": "PNBE", "stationName": "Patna Junction", "arrival": "Source", "departure": "19:25", "haltMin": 0, "day": 1, "distanceKm": 0, "platform": "4" },
+      { "stationCode": "DNR", "stationName": "Danapur", "arrival": "19:43", "departure": "19:45", "haltMin": 2, "day": 1, "distanceKm": 10, "platform": "3" },
+      { "stationCode": "CNB", "stationName": "Kanpur Central", "arrival": "02:25", "departure": "02:30", "haltMin": 5, "day": 2, "distanceKm": 558, "platform": "2" },
+      { "stationCode": "NDLS", "stationName": "New Delhi", "arrival": "07:55", "departure": "Destination", "haltMin": 0, "day": 2, "distanceKm": 998, "platform": "14" }
+    ]
+  },
+  {
+    "trainNumber": "12394",
+    "trainName": "Sampoorna Kranti Express",
+    "trainType": "Superfast",
+    "sourceStation": "NDLS",
+    "destinationStation": "PNBE",
+    "departureTime": "17:30",
+    "arrivalTime": "06:50",
+    "duration": "13h 20m",
+    "distanceKm": 998,
+    "runsOnDays": [true, true, true, true, true, true, true],
+    "classes": [
+      { "classCode": "1A", "className": "AC First Class", "fare": 3810, "status": "AVAILABLE", "seatsCount": 4, "confirmedProbability": 95 },
+      { "classCode": "2A", "className": "AC 2 Tier", "fare": 2250, "status": "RAC", "racCount": 16, "confirmedProbability": 81 },
+      { "classCode": "3A", "className": "AC 3 Tier", "fare": 1580, "status": "AVAILABLE", "seatsCount": 65, "confirmedProbability": 90 },
+      { "classCode": "SL", "className": "Sleeper", "fare": 520, "status": "WL", "wlCount": 28, "confirmedProbability": 60 }
+    ],
+    "route": [
+      { "stationCode": "NDLS", "stationName": "New Delhi", "arrival": "Source", "departure": "17:30", "haltMin": 0, "day": 1, "distanceKm": 0, "platform": "16" },
+      { "stationCode": "CNB", "stationName": "Kanpur Central", "arrival": "22:22", "departure": "22:30", "haltMin": 8, "day": 1, "distanceKm": 440, "platform": "5" },
+      { "stationCode": "DNR", "stationName": "Danapur", "arrival": "06:15", "departure": "06:20", "haltMin": 5, "day": 2, "distanceKm": 988, "platform": "1" },
+      { "stationCode": "PNBE", "stationName": "Patna Junction", "arrival": "06:50", "departure": "Destination", "haltMin": 0, "day": 2, "distanceKm": 998, "platform": "4" }
+    ]
+  },
+  {
+    "trainNumber": "12801",
+    "trainName": "Purushottam Express",
+    "trainType": "Superfast",
+    "sourceStation": "PURI",
+    "destinationStation": "NDLS",
+    "departureTime": "21:55",
+    "arrivalTime": "04:00",
+    "duration": "30h 05m",
+    "distanceKm": 1860,
+    "runsOnDays": [true, true, true, true, true, true, true],
+    "classes": [
+      { "classCode": "1A", "className": "AC First Class", "fare": 5120, "status": "AVAILABLE", "seatsCount": 4, "confirmedProbability": 92 },
+      { "classCode": "2A", "className": "AC 2 Tier", "fare": 3150, "status": "AVAILABLE", "seatsCount": 18, "confirmedProbability": 87 },
+      { "classCode": "3A", "className": "AC 3 Tier", "fare": 2240, "status": "AVAILABLE", "seatsCount": 54, "confirmedProbability": 91 },
+      { "classCode": "SL", "className": "Sleeper", "fare": 775, "status": "AVAILABLE", "seatsCount": 88, "confirmedProbability": 94 }
+    ],
+    "route": [
+      { "stationCode": "PURI", "stationName": "Puri", "arrival": "Source", "departure": "21:55", "haltMin": 0, "day": 1, "distanceKm": 0, "platform": "6" },
+      { "stationCode": "BBS", "stationName": "Bhubaneswar", "arrival": "22:55", "departure": "23:00", "haltMin": 5, "day": 1, "distanceKm": 63, "platform": "1" },
+      { "stationCode": "TATA", "stationName": "Tatanagar Junction", "arrival": "06:10", "departure": "06:20", "haltMin": 10, "day": 2, "distanceKm": 514, "platform": "3" },
+      { "stationCode": "PRYJ", "stationName": "Prayagraj Junction", "arrival": "19:20", "departure": "19:30", "haltMin": 10, "day": 2, "distanceKm": 1225, "platform": "2" },
+      { "stationCode": "CNB", "stationName": "Kanpur Central", "arrival": "21:55", "departure": "22:00", "haltMin": 5, "day": 2, "distanceKm": 1420, "platform": "1" },
+      { "stationCode": "NDLS", "stationName": "New Delhi", "arrival": "04:00", "departure": "Destination", "haltMin": 0, "day": 3, "distanceKm": 1860, "platform": "8" }
+    ]
+  },
+  {
+    "trainNumber": "12802",
+    "trainName": "Purushottam Express",
+    "trainType": "Superfast",
+    "sourceStation": "NDLS",
+    "destinationStation": "PURI",
+    "departureTime": "22:40",
+    "arrivalTime": "05:25",
+    "duration": "30h 45m",
+    "distanceKm": 1860,
+    "runsOnDays": [true, true, true, true, true, true, true],
+    "classes": [
+      { "classCode": "2A", "className": "AC 2 Tier", "fare": 3150, "status": "AVAILABLE", "seatsCount": 12, "confirmedProbability": 85 },
+      { "classCode": "3A", "className": "AC 3 Tier", "fare": 2240, "status": "AVAILABLE", "seatsCount": 62, "confirmedProbability": 90 },
+      { "classCode": "SL", "className": "Sleeper", "fare": 775, "status": "AVAILABLE", "seatsCount": 42, "confirmedProbability": 88 }
+    ],
+    "route": [
+      { "stationCode": "NDLS", "stationName": "New Delhi", "arrival": "Source", "departure": "22:40", "haltMin": 0, "day": 1, "distanceKm": 0, "platform": "8" },
+      { "stationCode": "CNB", "stationName": "Kanpur Central", "arrival": "04:00", "departure": "04:05", "haltMin": 5, "day": 2, "distanceKm": 440, "platform": "4" },
+      { "stationCode": "PRYJ", "stationName": "Prayagraj Junction", "arrival": "06:55", "departure": "07:00", "haltMin": 5, "day": 2, "distanceKm": 635, "platform": "1" },
+      { "stationCode": "TATA", "stationName": "Tatanagar Junction", "arrival": "20:00", "departure": "20:10", "haltMin": 10, "day": 2, "distanceKm": 1346, "platform": "4" },
+      { "stationCode": "BBS", "stationName": "Bhubaneswar", "arrival": "03:35", "departure": "03:40", "haltMin": 5, "day": 3, "distanceKm": 1797, "platform": "3" },
+      { "stationCode": "PURI", "stationName": "Puri", "arrival": "05:25", "departure": "Destination", "haltMin": 0, "day": 3, "distanceKm": 1860, "platform": "2" }
+    ]
+  },
+  {
+    "trainNumber": "12622",
+    "trainName": "Tamil Nadu Express",
+    "trainType": "Superfast",
+    "sourceStation": "NDLS",
+    "destinationStation": "MAS",
+    "departureTime": "21:05",
+    "arrivalTime": "06:15",
+    "duration": "33h 10m",
+    "distanceKm": 2182,
+    "runsOnDays": [true, true, true, true, true, true, true],
+    "classes": [
+      { "classCode": "1A", "className": "AC First Class", "fare": 5620, "status": "AVAILABLE", "seatsCount": 3, "confirmedProbability": 91 },
+      { "classCode": "2A", "className": "AC 2 Tier", "fare": 3410, "status": "AVAILABLE", "seatsCount": 16, "confirmedProbability": 84 },
+      { "classCode": "3A", "className": "AC 3 Tier", "fare": 2420, "status": "AVAILABLE", "seatsCount": 48, "confirmedProbability": 89 },
+      { "classCode": "SL", "className": "Sleeper", "fare": 880, "status": "AVAILABLE", "seatsCount": 72, "confirmedProbability": 92 }
+    ],
+    "route": [
+      { "stationCode": "NDLS", "stationName": "New Delhi", "arrival": "Source", "departure": "21:05", "haltMin": 0, "day": 1, "distanceKm": 0, "platform": "4" },
+      { "stationCode": "AGC", "stationName": "Agra Cantt", "arrival": "23:25", "departure": "23:27", "haltMin": 2, "day": 1, "distanceKm": 195, "platform": "1" },
+      { "stationCode": "GWL", "stationName": "Gwalior Junction", "arrival": "01:13", "departure": "01:15", "haltMin": 2, "day": 2, "distanceKm": 313, "platform": "1" },
+      { "stationCode": "BPL", "stationName": "Bhopal Junction", "arrival": "06:45", "departure": "06:50", "haltMin": 5, "day": 2, "distanceKm": 702, "platform": "1" },
+      { "stationCode": "NGP", "stationName": "Nagpur Junction", "arrival": "13:05", "departure": "13:10", "haltMin": 5, "day": 2, "distanceKm": 1092, "platform": "2" },
+      { "stationCode": "BZA", "stationName": "Vijayawada Junction", "arrival": "23:15", "departure": "23:25", "haltMin": 10, "day": 2, "distanceKm": 1751, "platform": "1" },
+      { "stationCode": "MAS", "stationName": "MGR Chennai Central", "arrival": "06:15", "departure": "Destination", "haltMin": 0, "day": 3, "distanceKm": 2182, "platform": "5" }
+    ]
+  },
+  {
+    "trainNumber": "12015",
+    "trainName": "Ajmer Shatabdi Express",
+    "trainType": "Shatabdi",
+    "sourceStation": "NDLS",
+    "destinationStation": "JP",
+    "departureTime": "06:10",
+    "arrivalTime": "10:40",
+    "duration": "04h 30m",
+    "distanceKm": 308,
+    "runsOnDays": [true, true, true, true, true, true, true],
+    "classes": [
+      { "classCode": "CC", "className": "AC Chair Car", "fare": 950, "status": "AVAILABLE", "seatsCount": 94, "confirmedProbability": 96 },
+      { "classCode": "EC", "className": "Exec. Chair Car", "fare": 1820, "status": "AVAILABLE", "seatsCount": 16, "confirmedProbability": 99 }
+    ],
+    "route": [
+      { "stationCode": "NDLS", "stationName": "New Delhi", "arrival": "Source", "departure": "06:10", "haltMin": 0, "day": 1, "distanceKm": 0, "platform": "10" },
+      { "stationCode": "JP", "stationName": "Jaipur Junction", "arrival": "10:40", "departure": "Destination", "haltMin": 0, "day": 1, "distanceKm": 308, "platform": "1" }
+    ]
+  },
+  {
+    "trainNumber": "22439",
+    "trainName": "Vande Bharat Express",
+    "trainType": "Vande Bharat",
+    "sourceStation": "NDLS",
+    "destinationStation": "SVDK",
+    "departureTime": "06:00",
+    "arrivalTime": "14:00",
+    "duration": "08h 00m",
+    "distanceKm": 655,
+    "runsOnDays": [true, false, true, true, true, true, true],
+    "classes": [
+      { "classCode": "CC", "className": "AC Chair Car", "fare": 1630, "status": "AVAILABLE", "seatsCount": 78, "confirmedProbability": 97 },
+      { "classCode": "EC", "className": "Exec. Chair Car", "fare": 3015, "status": "AVAILABLE", "seatsCount": 20, "confirmedProbability": 98 }
+    ],
+    "route": [
+      { "stationCode": "NDLS", "stationName": "New Delhi", "arrival": "Source", "departure": "06:00", "haltMin": 0, "day": 1, "distanceKm": 0, "platform": "1" },
+      { "stationCode": "CDG", "stationName": "Chandigarh Junction", "arrival": "08:45", "departure": "08:47", "haltMin": 2, "day": 1, "distanceKm": 244, "platform": "1" },
+      { "stationCode": "SVDK", "stationName": "Shri Mata Vaishno Devi Katra", "arrival": "14:00", "departure": "Destination", "haltMin": 0, "day": 1, "distanceKm": 655, "platform": "1" }
+    ]
+  },
+  {
+    "trainNumber": "12909",
+    "trainName": "NZM Garib Rath",
+    "trainType": "Garib Rath",
+    "sourceStation": "BDTS",
+    "destinationStation": "NZM",
+    "departureTime": "17:30",
+    "arrivalTime": "09:40",
+    "duration": "16h 10m",
+    "distanceKm": 1367,
+    "runsOnDays": [false, true, false, true, false, true, false],
+    "classes": [
+      { "classCode": "3A", "className": "AC 3 Tier", "fare": 1050, "status": "AVAILABLE", "seatsCount": 118, "confirmedProbability": 94 },
+      { "classCode": "CC", "className": "AC Chair Car", "fare": 890, "status": "AVAILABLE", "seatsCount": 32, "confirmedProbability": 95 }
+    ],
+    "route": [
+      { "stationCode": "BDTS", "stationName": "Bandra Terminus", "arrival": "Source", "departure": "17:30", "haltMin": 0, "day": 1, "distanceKm": 0, "platform": "4" },
+      { "stationCode": "ST", "stationName": "Surat", "arrival": "20:47", "departure": "20:52", "haltMin": 5, "day": 1, "distanceKm": 252, "platform": "1" },
+      { "stationCode": "BRC", "stationName": "Vadodara Junction", "arrival": "22:19", "departure": "22:29", "haltMin": 10, "day": 1, "distanceKm": 381, "platform": "2" },
+      { "stationCode": "NZM", "stationName": "Hazrat Nizamuddin", "arrival": "09:40", "departure": "Destination", "haltMin": 0, "day": 2, "distanceKm": 1367, "platform": "6" }
+    ]
+  },
+  {
+    "trainNumber": "20901",
+    "trainName": "Gandhinagar Capital Vande Bharat",
+    "trainType": "Vande Bharat",
+    "sourceStation": "MMCT",
+    "destinationStation": "ADI",
+    "departureTime": "06:00",
+    "arrivalTime": "11:25",
+    "duration": "05h 25m",
+    "distanceKm": 491,
+    "runsOnDays": [true, true, true, false, true, true, true],
+    "classes": [
+      { "classCode": "CC", "className": "AC Chair Car", "fare": 1420, "status": "AVAILABLE", "seatsCount": 92, "confirmedProbability": 98 },
+      { "classCode": "EC", "className": "Exec. Chair Car", "fare": 2630, "status": "AVAILABLE", "seatsCount": 24, "confirmedProbability": 99 }
+    ],
+    "route": [
+      { "stationCode": "MMCT", "stationName": "Mumbai Central", "arrival": "Source", "departure": "06:00", "haltMin": 0, "day": 1, "distanceKm": 0, "platform": "5" },
+      { "stationCode": "ST", "stationName": "Surat", "arrival": "08:50", "departure": "08:53", "haltMin": 3, "day": 1, "distanceKm": 263, "platform": "1" },
+      { "stationCode": "BRC", "stationName": "Vadodara Junction", "arrival": "09:56", "departure": "09:59", "haltMin": 3, "day": 1, "distanceKm": 392, "platform": "2" },
+      { "stationCode": "ADI", "stationName": "Ahmedabad Junction", "arrival": "11:25", "departure": "Destination", "haltMin": 0, "day": 1, "distanceKm": 491, "platform": "1" }
+    ]
+  },
+  {
+    "trainNumber": "22425",
+    "trainName": "Ayodhya Vande Bharat",
+    "trainType": "Vande Bharat",
+    "sourceStation": "ANVT",
+    "destinationStation": "AY",
+    "departureTime": "06:10",
+    "arrivalTime": "14:30",
+    "duration": "08h 20m",
+    "distanceKm": 628,
+    "runsOnDays": [true, true, false, true, true, true, true],
+    "classes": [
+      { "classCode": "CC", "className": "AC Chair Car", "fare": 1570, "status": "AVAILABLE", "seatsCount": 68, "confirmedProbability": 95 },
+      { "classCode": "EC", "className": "Exec. Chair Car", "fare": 2915, "status": "AVAILABLE", "seatsCount": 18, "confirmedProbability": 98 }
+    ],
+    "route": [
+      { "stationCode": "ANVT", "stationName": "Anand Vihar Terminal", "arrival": "Source", "departure": "06:10", "haltMin": 0, "day": 1, "distanceKm": 0, "platform": "1" },
+      { "stationCode": "CNB", "stationName": "Kanpur Central", "arrival": "11:00", "departure": "11:05", "haltMin": 5, "day": 1, "distanceKm": 428, "platform": "3" },
+      { "stationCode": "LKO", "stationName": "Lucknow Charbagh", "arrival": "12:25", "departure": "12:30", "haltMin": 5, "day": 1, "distanceKm": 500, "platform": "2" },
+      { "stationCode": "AY", "stationName": "Ayodhya Dham Junction", "arrival": "14:30", "departure": "Destination", "haltMin": 0, "day": 1, "distanceKm": 628, "platform": "1" }
+    ]
+  },
+  {
+    "trainNumber": "12137",
+    "trainName": "Punjab Mail",
+    "trainType": "Express",
+    "sourceStation": "CSMT",
+    "destinationStation": "ASR",
+    "departureTime": "19:35",
+    "arrivalTime": "05:10",
+    "duration": "33h 35m",
+    "distanceKm": 1928,
+    "runsOnDays": [true, true, true, true, true, true, true],
+    "classes": [
+      { "classCode": "1A", "className": "AC First Class", "fare": 5010, "status": "AVAILABLE", "seatsCount": 4, "confirmedProbability": 91 },
+      { "classCode": "2A", "className": "AC 2 Tier", "fare": 2990, "status": "AVAILABLE", "seatsCount": 18, "confirmedProbability": 84 },
+      { "classCode": "3A", "className": "AC 3 Tier", "fare": 2080, "status": "AVAILABLE", "seatsCount": 56, "confirmedProbability": 90 },
+      { "classCode": "SL", "className": "Sleeper", "fare": 760, "status": "AVAILABLE", "seatsCount": 94, "confirmedProbability": 93 }
+    ],
+    "route": [
+      { "stationCode": "CSMT", "stationName": "Mumbai CSMT", "arrival": "Source", "departure": "19:35", "haltMin": 0, "day": 1, "distanceKm": 0, "platform": "18" },
+      { "stationCode": "BPL", "stationName": "Bhopal Junction", "arrival": "09:40", "departure": "09:45", "haltMin": 5, "day": 2, "distanceKm": 837, "platform": "2" },
+      { "stationCode": "AGC", "stationName": "Agra Cantt", "arrival": "17:50", "departure": "17:55", "haltMin": 5, "day": 2, "distanceKm": 1344, "platform": "1" },
+      { "stationCode": "NDLS", "stationName": "New Delhi", "arrival": "21:25", "departure": "21:40", "haltMin": 15, "day": 2, "distanceKm": 1539, "platform": "5" },
+      { "stationCode": "ASR", "stationName": "Amritsar Junction", "arrival": "05:10", "departure": "Destination", "haltMin": 0, "day": 3, "distanceKm": 1928, "platform": "3" }
+    ]
+  },
+  {
+    "trainNumber": "18627",
+    "trainName": "INTERCITY EXP",
+    "trainType": "OTHER",
+    "sourceStation": "HWH",
+    "destinationStation": "RNC",
+    "departureTime": "12:50",
+    "arrivalTime": "22:55",
+    "duration": "10h 05m",
+    "distanceKm": 421,
+    "runsOnDays": [true, true, true, true, true, true, true],
+    "classes": [
+      { "classCode": "2S", "className": "Second Sitting (2S)", "fare": 180, "status": "AVAILABLE", "seatsCount": 142, "confirmedProbability": 99 },
+      { "classCode": "CC", "className": "AC Chair car (CC)", "fare": 665, "status": "AVAILABLE", "seatsCount": 46, "confirmedProbability": 96 },
+      { "classCode": "3E", "className": "AC 3 Economy (3E)", "fare": 790, "status": "AVAILABLE", "seatsCount": 32, "confirmedProbability": 92 },
+      { "classCode": "3A", "className": "AC 3 Tier (3A)", "fare": 855, "status": "AVAILABLE", "seatsCount": 24, "confirmedProbability": 88 }
+    ],
+    "route": [
+      { "stationCode": "HWH", "stationName": "HOWRAH JN", "arrival": "Source", "departure": "12:50", "haltMin": 0, "day": 1, "distanceKm": 0, "platform": "18" },
+      { "stationCode": "KGP", "stationName": "Kharagpur Junction", "arrival": "14:20", "departure": "14:25", "haltMin": 5, "day": 1, "distanceKm": 115, "platform": "2" },
+      { "stationCode": "TATA", "stationName": "Tatanagar Junction", "arrival": "16:45", "departure": "16:50", "haltMin": 5, "day": 1, "distanceKm": 249, "platform": "3" },
+      { "stationCode": "MURI", "stationName": "Muri Junction", "arrival": "19:15", "departure": "19:20", "haltMin": 5, "day": 1, "distanceKm": 356, "platform": "1" },
+      { "stationCode": "RNC", "stationName": "RANCHI", "arrival": "22:55", "departure": "Destination", "haltMin": 0, "day": 1, "distanceKm": 421, "platform": "1" }
+    ]
+  },
+  {
+    "trainNumber": "20897",
+    "trainName": "VANDE BHARAT EXP",
+    "trainType": "SHATABDI",
+    "sourceStation": "HWH",
+    "destinationStation": "RNC",
+    "departureTime": "14:35",
+    "arrivalTime": "22:00",
+    "duration": "07h 25m",
+    "distanceKm": 421,
+    "runsOnDays": [true, true, true, false, true, true, true],
+    "classes": [
+      { "classCode": "CC", "className": "AC Chair car (CC)", "fare": 1055, "status": "AVAILABLE", "seatsCount": 68, "confirmedProbability": 98 },
+      { "classCode": "EC", "className": "Exec. Chair Car (EC)", "fare": 2045, "status": "AVAILABLE", "seatsCount": 22, "confirmedProbability": 99 }
+    ],
+    "route": [
+      { "stationCode": "HWH", "stationName": "HOWRAH JN", "arrival": "Source", "departure": "14:35", "haltMin": 0, "day": 1, "distanceKm": 0, "platform": "21" },
+      { "stationCode": "KGP", "stationName": "Kharagpur Junction", "arrival": "16:08", "departure": "16:10", "haltMin": 2, "day": 1, "distanceKm": 115, "platform": "1" },
+      { "stationCode": "TATA", "stationName": "Tatanagar Junction", "arrival": "17:53", "departure": "17:58", "haltMin": 5, "day": 1, "distanceKm": 249, "platform": "3" },
+      { "stationCode": "MURI", "stationName": "Muri Junction", "arrival": "19:35", "departure": "19:37", "haltMin": 2, "day": 1, "distanceKm": 356, "platform": "1" },
+      { "stationCode": "RNC", "stationName": "RANCHI", "arrival": "22:00", "departure": "Destination", "haltMin": 0, "day": 1, "distanceKm": 421, "platform": "1" }
+    ]
+  },
+  {
+    "trainNumber": "18615",
+    "trainName": "KRIYA YOGA EXP",
+    "trainType": "OTHER",
+    "sourceStation": "HWH",
+    "destinationStation": "RNC",
+    "departureTime": "21:10",
+    "arrivalTime": "05:40",
+    "duration": "08h 30m",
+    "distanceKm": 421,
+    "runsOnDays": [true, true, true, true, true, true, true],
+    "classes": [
+      { "classCode": "SL", "className": "Sleeper (SL)", "fare": 265, "status": "AVAILABLE", "seatsCount": 112, "confirmedProbability": 94 },
+      { "classCode": "3E", "className": "AC 3 Economy (3E)", "fare": 710, "status": "AVAILABLE", "seatsCount": 42, "confirmedProbability": 91 },
+      { "classCode": "3A", "className": "AC 3 Tier (3A)", "fare": 775, "status": "AVAILABLE", "seatsCount": 38, "confirmedProbability": 89 },
+      { "classCode": "2A", "className": "AC 2 Tier (2A)", "fare": 1110, "status": "AVAILABLE", "seatsCount": 16, "confirmedProbability": 93 },
+      { "classCode": "1A", "className": "AC First Class (1A)", "fare": 1875, "status": "AVAILABLE", "seatsCount": 6, "confirmedProbability": 96 }
+    ],
+    "route": [
+      { "stationCode": "HWH", "stationName": "HOWRAH JN", "arrival": "Source", "departure": "21:10", "haltMin": 0, "day": 1, "distanceKm": 0, "platform": "8" },
+      { "stationCode": "KGP", "stationName": "Kharagpur Junction", "arrival": "22:50", "departure": "22:55", "haltMin": 5, "day": 1, "distanceKm": 115, "platform": "1" },
+      { "stationCode": "TATA", "stationName": "Tatanagar Junction", "arrival": "01:15", "departure": "01:20", "haltMin": 5, "day": 2, "distanceKm": 249, "platform": "3" },
+      { "stationCode": "MURI", "stationName": "Muri Junction", "arrival": "03:40", "departure": "03:45", "haltMin": 5, "day": 2, "distanceKm": 356, "platform": "1" },
+      { "stationCode": "RNC", "stationName": "RANCHI", "arrival": "05:40", "departure": "Destination", "haltMin": 0, "day": 2, "distanceKm": 421, "platform": "2" }
+    ]
+  }
+]

@@ -1,0 +1,84 @@
+[
+  {
+    "pnrNumber": "2458921473",
+    "trainNumber": "12302",
+    "trainName": "Howrah Rajdhani Express",
+    "journeyDate": "2026-09-12",
+    "fromStation": "NDLS",
+    "fromStationName": "New Delhi",
+    "toStation": "HWH",
+    "toStationName": "Howrah Junction",
+    "boardingStation": "NDLS",
+    "journeyClass": "3A",
+    "quota": "GN",
+    "chartStatus": "CHART_PREPARED",
+    "passengers": [
+      {
+        "passengerNo": 1,
+        "bookingStatus": "RAC 8",
+        "currentStatus": "CNF",
+        "coach": "B2",
+        "berth": 43,
+        "berthType": "LB"
+      },
+      {
+        "passengerNo": 2,
+        "bookingStatus": "RAC 9",
+        "currentStatus": "CNF",
+        "coach": "B2",
+        "berth": 44,
+        "berthType": "MB"
+      }
+    ]
+  },
+  {
+    "pnrNumber": "4521098472",
+    "trainNumber": "22436",
+    "trainName": "Vande Bharat Express",
+    "journeyDate": "2026-09-15",
+    "fromStation": "NDLS",
+    "fromStationName": "New Delhi",
+    "toStation": "BSB",
+    "toStationName": "Varanasi Junction",
+    "boardingStation": "NDLS",
+    "journeyClass": "CC",
+    "quota": "GN",
+    "chartStatus": "CHART_NOT_PREPARED",
+    "passengers": [
+      {
+        "passengerNo": 1,
+        "bookingStatus": "CNF C4 23 WS",
+        "currentStatus": "CNF",
+        "coach": "C4",
+        "berth": 23,
+        "berthType": "WS"
+      }
+    ]
+  },
+  {
+    "pnrNumber": "8145920147",
+    "trainNumber": "12393",
+    "trainName": "Sampoorna Kranti Express",
+    "journeyDate": "2026-09-20",
+    "fromStation": "PNBE",
+    "fromStationName": "Patna Junction",
+    "toStation": "NDLS",
+    "toStationName": "New Delhi",
+    "boardingStation": "PNBE",
+    "journeyClass": "SL",
+    "quota": "GN",
+    "chartStatus": "CHART_NOT_PREPARED",
+    "passengers": [
+      {
+        "passengerNo": 1,
+        "bookingStatus": "WL 34",
+        "currentStatus": "WL 12"
+      },
+      {
+        "passengerNo": 2,
+        "bookingStatus": "WL 35",
+        "currentStatus": "WL 13"
+      }
+    ]
+  }
+]
