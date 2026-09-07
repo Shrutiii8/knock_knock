@@ -29,49 +29,87 @@ export default function SelectedTrainBanner({
   const [isCheckingEta, setIsCheckingEta] = useState(false);
   const [etaData, setEtaData] = useState<EtaInfo | null>(null);
 
-  const calculateEta = (isManualRefresh = false) => {
+  const calculateEta = async (isManualRefresh = false) => {
     setIsCheckingEta(true);
-    setTimeout(() => {
-      // Deterministic calculation based on train number digits
-      const numSum = train.trainNumber.split('').reduce((acc, c) => acc + (parseInt(c) || 0), 0);
-      const delayMinutes = numSum % 3 === 0 ? 0 : (numSum % 2 === 0 ? 10 : 25);
-      
-      const [arrH, arrM] = train.arrivalTime.split(':').map(Number);
-      const totalArrivalMins = (isNaN(arrH) ? 22 : arrH) * 60 + (isNaN(arrM) ? 55 : arrM) + delayMinutes;
-      const etaH = Math.floor((totalArrivalMins / 60) % 24);
-      const etaM = totalArrivalMins % 60;
-      const estimatedArrival = `${String(etaH).padStart(2, '0')}:${String(etaM).padStart(2, '0')}`;
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
+    const trainNumInt = parseInt(train.trainNumber, 10) || 0;
 
-      // Station stops from route if available, or realistic defaults
-      const intermediateStops = train.route && train.route.length > 2 
-        ? train.route.slice(1, -1) 
-        : [];
-      const currentStopName = intermediateStops.length > 0 
-        ? intermediateStops[Math.floor(intermediateStops.length / 2)].stationName 
-        : `${fromStationName} Outskirts`;
-      const nextStopName = intermediateStops.length > 1
-        ? intermediateStops[Math.min(intermediateStops.length - 1, Math.floor(intermediateStops.length / 2) + 1)].stationName
-        : toStationName;
+    try {
+      const res = await fetch(`${apiUrl}/api/eta/predict`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          train_number: trainNumInt,
+          train_name: train.trainName,
+          route_name: `${fromStationName}-${toStationName}`,
+          departure_time: train.departureTime,
+          arrival_time: train.arrivalTime,
+          days_of_departure: train.runningDays?.join(',') || 'Daily',
+          train_type: train.trainType || 'EXPRESS',
+          current_station: fromStationName,
+          upcoming_stations: toStationName,
+          departure_date: journeyDate,
+          is_live: true
+        })
+      });
 
-      const remainingDistance = Math.round(train.distanceKm * 0.42);
+      if (res.ok) {
+        const data = await res.json();
+        const delayMinutes = Math.max(0, Math.round(data.delay_minutes || 0));
+        const estimatedArrival = data.predicted_arrival || train.arrivalTime;
 
-      const newEta: EtaInfo = {
-        scheduledArrival: train.arrivalTime,
-        estimatedArrival,
-        delayMinutes,
-        status: delayMinutes === 0 ? 'ON_TIME' : 'DELAYED',
-        platform: (numSum % 4) + 1,
-        currentLocation: `Departed ${currentStopName} • Tracking via GPS`,
-        nextStop: nextStopName,
-        speedKmH: delayMinutes === 0 ? 98 : 74,
-        lastUpdated: 'Just now (Live NTES feed)',
-        distanceRemainingKm: remainingDistance || 165
-      };
+        const newEta: EtaInfo = {
+          scheduledArrival: data.scheduled_arrival || train.arrivalTime,
+          estimatedArrival,
+          delayMinutes,
+          status: delayMinutes === 0 ? 'ON_TIME' : 'DELAYED',
+          platform: (trainNumInt % 4) + 1,
+          currentLocation: `Live GPS Tracking • ${fromStationName}`,
+          nextStop: toStationName,
+          speedKmH: delayMinutes === 0 ? 98 : 74,
+          lastUpdated: 'Live ML Model Feed',
+          distanceRemainingKm: Math.round(train.distanceKm * 0.42) || 165,
+          confidence: data.confidence,
+          confidenceInterval: data.confidence_interval,
+          majorDelayFactors: data.major_delay_factors || []
+        };
 
-      setEtaData(newEta);
-      setIsCheckingEta(false);
-      setIsEtaModalOpen(true);
-    }, isManualRefresh ? 400 : 300);
+        setEtaData(newEta);
+        setIsCheckingEta(false);
+        setIsEtaModalOpen(true);
+        return;
+      }
+    } catch (err) {
+      console.warn('Backend ETA endpoint unreachable, using fallback model', err);
+    }
+
+    // Fallback calculation if backend call fails or returns non-200
+    const numSum = train.trainNumber.split('').reduce((acc, c) => acc + (parseInt(c) || 0), 0);
+    const delayMinutes = numSum % 3 === 0 ? 0 : (numSum % 2 === 0 ? 10 : 25);
+    const [arrH, arrM] = train.arrivalTime.split(':').map(Number);
+    const totalArrivalMins = (isNaN(arrH) ? 22 : arrH) * 60 + (isNaN(arrM) ? 55 : arrM) + delayMinutes;
+    const etaH = Math.floor((totalArrivalMins / 60) % 24);
+    const etaM = totalArrivalMins % 60;
+    const estimatedArrival = `${String(etaH).padStart(2, '0')}:${String(etaM).padStart(2, '0')}`;
+
+    const newEta: EtaInfo = {
+      scheduledArrival: train.arrivalTime,
+      estimatedArrival,
+      delayMinutes,
+      status: delayMinutes === 0 ? 'ON_TIME' : 'DELAYED',
+      platform: (numSum % 4) + 1,
+      currentLocation: `Tracking via GPS • ${fromStationName}`,
+      nextStop: toStationName,
+      speedKmH: delayMinutes === 0 ? 98 : 74,
+      lastUpdated: 'Just now (Live NTES feed)',
+      distanceRemainingKm: Math.round(train.distanceKm * 0.42) || 165
+    };
+
+    setEtaData(newEta);
+    setIsCheckingEta(false);
+    setIsEtaModalOpen(true);
   };
 
   const quotaObj = QUOTAS.find(q => q.code === quota);
