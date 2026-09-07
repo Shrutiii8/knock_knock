@@ -1,0 +1,52 @@
+{
+  "day_of_week": {
+    "Friday": {
+      "mean": 26.06,
+      "median": 7.0,
+      "std": 52.97,
+      "count": 6428.0
+    },
+    "Monday": {
+      "mean": 33.34,
+      "median": 8.0,
+      "std": 77.21,
+      "count": 8235.0
+    },
+    "Saturday": {
+      "mean": 25.52,
+      "median": 7.0,
+      "std": 48.36,
+      "count": 6347.0
+    },
+    "Sunday": {
+      "mean": 46.23,
+      "median": 8.0,
+      "std": 119.0,
+      "count": 8278.0
+    },
+    "Thursday": {
+      "mean": 39.18,
+      "median": 8.0,
+      "std": 78.07,
+      "count": 6837.0
+    },
+    "Tuesday": {
+      "mean": 30.51,
+      "median": 7.0,
+      "std": 58.95,
+      "count": 6894.0
+    },
+    "Wednesday": {
+      "mean": 36.28,
+      "median": 7.0,
+      "std": 76.07,
+      "count": 6981.0
+    }
+  },
+  "global_benchmark": {
+    "overall_avg_delay_minutes": 34.36,
+    "overall_median_delay_minutes": 7.0,
+    "overall_p90_delay_minutes": 96.0,
+    "overall_on_time_percentage": 61.61
+  }
+}

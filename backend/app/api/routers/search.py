@@ -4,6 +4,10 @@ from datetime import datetime
 from typing import Optional
 from app.schemas.db_models import StationDB, TrainDB
 from app.database import get_db
+from app.services.eta.orchestrator import ETAOrchestrator
+
+eta_orchestrator = ETAOrchestrator()
+
 
 router = APIRouter()
 
@@ -117,6 +121,42 @@ def search_trains(
             enriched_classes.append(cls)
             
         train["classes"] = enriched_classes
+        
+        # Build ETA context from available train data
+        eta_context = {
+            "route_name": "UNKNOWN",
+            "train_name": train.get("trainName", "UNKNOWN"),
+            "train_number": train.get("trainNumber", 0),
+            "departure_time": train.get("departureTime", "00:00"),
+            "days_of_departure": train.get("runsOnDays", "Daily"),
+            "arrival_time": train.get("arrivalTime", "00:00"),
+            "stations_stopped": ",".join([r.get("stationCode", "") for r in train.get("route", [])]),
+            "historical_avg_delay_min": 15.0,
+            "historical_ontime_pct": 75.0,
+            "train_type": train.get("trainType", "EXPRESS"),
+            "locomotive_power": "WAP4",
+            "max_coach_speed_kmh": 110.0,
+            "current_station": from_code,
+            "upcoming_stations": to_code,
+            "passed_stations": "",
+            "soil_type": "Alluvial",
+            "incline_gradient": "Flat",
+            "geographic_hazard_delays": "None",
+            "data_source": "search_api",
+            "current_delay_min": 0.0,
+            "is_live": False,
+            "data_freshness": datetime.now().strftime("%H:%M:%S"),
+            "departure_date": date
+        }
+        
+        try:
+            eta_prediction = eta_orchestrator.predict(eta_context)
+            if eta_prediction:
+                train["eta_prediction"] = eta_prediction.model_dump()
+        except Exception as e:
+            # Fallback if ETA orchestration fails unexpectedly
+            print(f"Error predicting ETA for train {train.get('trainNumber')}: {e}")
+            
         enriched_trains.append(train)
         
     return {

@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
-from app.api.routers import stations, trains, live_status, pnr, schedule, search, auth, bookings
+from app.api.routers import stations, trains, live_status, pnr, schedule, search, auth, bookings, eta
 
 app = FastAPI(
     title="IRCTC Clone Backend API",
@@ -34,6 +34,7 @@ app.include_router(live_status.router, prefix="/api/live-status", tags=["Live St
 app.include_router(pnr.router, prefix="/api/pnr", tags=["PNR"])
 app.include_router(schedule.router, prefix="/api/schedule", tags=["Schedule"])
 app.include_router(search.router, prefix="/api/search", tags=["Search"])
+app.include_router(eta.router, prefix="/api/eta", tags=["ETA"])
 app.include_router(auth.router, prefix="/api")
 app.include_router(bookings.router, prefix="/api")
 
