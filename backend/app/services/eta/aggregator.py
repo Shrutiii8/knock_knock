@@ -38,7 +38,8 @@ class ETAAggregator:
         
         # Calculate predicted arrival times
         # Context must contain scheduled departure, scheduled arrival, and departure_date
-        sch_arr_str = context.get("scheduled_arrival", "00:00")
+        sch_arr_raw = str(context.get("scheduled_arrival") or context.get("arrival_time") or "00:00").strip()
+        sch_arr_str = sch_arr_raw.split()[0] if sch_arr_raw else "00:00"
         dep_date_str = context.get("departure_date", datetime.now().strftime("%Y-%m-%d"))
         
         try:
@@ -48,11 +49,9 @@ class ETAAggregator:
             
         # Try to parse scheduled arrival. (Assuming format like "14:20")
         try:
-            arr_h, arr_m = map(int, sch_arr_str.split(":"))
+            parts = sch_arr_str.split(":")
+            arr_h, arr_m = int(parts[0]), int(parts[1])
             sch_arrival_dt = base_dt.replace(hour=arr_h, minute=arr_m, second=0, microsecond=0)
-            # Basic day crossing check: if scheduled arrival < departure time, it's next day
-            # Since we only have sch_arr_str here, context should ideally pass day offset
-            # We'll rely on the historical model's base context for this for now if provided in metadata
             day_offset = context.get("arrival_day_offset", 0)
             sch_arrival_dt += timedelta(days=day_offset)
         except Exception:

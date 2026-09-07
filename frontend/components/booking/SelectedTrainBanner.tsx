@@ -46,6 +46,7 @@ export default function SelectedTrainBanner({
           route_name: `${fromStationName}-${toStationName}`,
           departure_time: train.departureTime,
           arrival_time: train.arrivalTime,
+          scheduled_arrival: train.arrivalTime,
           days_of_departure: train.runningDays?.join(',') || 'Daily',
           train_type: train.trainType || 'EXPRESS',
           current_station: fromStationName,
