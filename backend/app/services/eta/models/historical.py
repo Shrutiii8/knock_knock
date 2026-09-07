@@ -40,12 +40,15 @@ class HistoricalETAModel(ETAModel):
         ontime_path = os.path.join(MODELS_DIR, "excel_ontime_model.pkl")
         metrics_path = os.path.join(MODELS_DIR, "excel_model_metrics.json")
 
-        if os.path.exists(delay_path):
-            self.delay_model = joblib.load(delay_path)
-            self._fix_model_loss(self.delay_model)
-        if os.path.exists(ontime_path):
-            self.ontime_model = joblib.load(ontime_path)
-            self._fix_model_loss(self.ontime_model)
+        import warnings
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            if os.path.exists(delay_path):
+                self.delay_model = joblib.load(delay_path)
+                self._fix_model_loss(self.delay_model)
+            if os.path.exists(ontime_path):
+                self.ontime_model = joblib.load(ontime_path)
+                self._fix_model_loss(self.ontime_model)
         if os.path.exists(metrics_path):
             with open(metrics_path, "r", encoding="utf-8") as f:
                 self.metrics = json.load(f)
