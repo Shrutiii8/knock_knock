@@ -4,6 +4,7 @@ import { ToastProvider } from '@/context/ToastContext';
 import { AuthProvider } from '@/context/AuthContext';
 import { BookingProvider } from '@/context/BookingContext';
 import { LanguageProvider } from '@/context/LanguageContext';
+import { ContactModalProvider } from '@/context/ContactModalContext';
 import AppLayoutClient from '@/components/layout/AppLayoutClient';
 
 export const metadata: Metadata = {
@@ -24,7 +25,9 @@ export default function RootLayout({
           <LanguageProvider>
             <AuthProvider>
               <BookingProvider>
-                <AppLayoutClient>{children}</AppLayoutClient>
+                <ContactModalProvider>
+                  <AppLayoutClient>{children}</AppLayoutClient>
+                </ContactModalProvider>
               </BookingProvider>
             </AuthProvider>
           </LanguageProvider>

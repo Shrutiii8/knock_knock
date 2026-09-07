@@ -6,6 +6,7 @@ import Footer from './Footer';
 import MobileNav from './MobileNav';
 import LoginModal from '@/components/modals/LoginModal';
 import LanguagePreferenceModal from '@/components/modals/LanguagePreferenceModal';
+import ContactUsModal from '@/components/modals/ContactUsModal';
 
 export default function AppLayoutClient({ children }: { children: React.ReactNode }) {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -17,6 +18,7 @@ export default function AppLayoutClient({ children }: { children: React.ReactNod
         <MobileNav isOpen={mobileNavOpen} onClose={() => setMobileNavOpen(false)} />
         <LoginModal />
         <LanguagePreferenceModal />
+        <ContactUsModal />
       </div>
 
       <main className="flex-1 w-full">

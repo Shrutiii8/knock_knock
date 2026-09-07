@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useLanguage } from '@/context/LanguageContext';
+import { useContactModal } from '@/context/ContactModalContext';
 
 interface MobileNavProps {
   isOpen: boolean;
@@ -30,6 +31,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
   const pathname = usePathname();
   const { user, isLoggedIn, openLoginModal, openRegisterModal, logout, walletBalance } = useAuth();
   const { language, openLanguageModal } = useLanguage();
+  const { openContactModal } = useContactModal();
 
   if (!isOpen) return null;
 
@@ -211,11 +213,22 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
               <span className="font-bold text-[#213D77]">{language === 'EN' ? 'English' : 'हिन्दी'}</span>
             </button>
 
-            <div className="flex items-center gap-2 text-gray-600 text-[11px] mb-1">
-              <Phone className="w-3.5 h-3.5 text-[#0A3D62]" />
-              <span>Helpline: 14646 / 139 (24x7)</span>
-            </div>
-            <div className="flex items-center gap-2 text-gray-600 text-[11px]">
+            <button
+              type="button"
+              onClick={() => {
+                onClose();
+                openContactModal();
+              }}
+              className="w-full flex items-center justify-between py-2 px-3 bg-white rounded border border-gray-200 text-xs font-semibold text-gray-800 hover:bg-blue-50 transition-colors shadow-2xs cursor-pointer mb-2"
+            >
+              <div className="flex items-center gap-2">
+                <Phone className="w-3.5 h-3.5 text-[#0A3D62]" />
+                <span>Contact Us / Helpline</span>
+              </div>
+              <span className="font-bold text-[#FB792B]">14646</span>
+            </button>
+
+            <div className="flex items-center gap-2 text-gray-600 text-[11px] px-1">
               <HelpCircle className="w-3.5 h-3.5 text-[#0A3D62]" />
               <span>care@brctc.co.in</span>
             </div>

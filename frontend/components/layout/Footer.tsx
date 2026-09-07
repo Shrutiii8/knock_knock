@@ -4,9 +4,11 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { ChevronDown } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import { useContactModal } from '@/context/ContactModalContext';
 
 export default function Footer() {
   const { language } = useLanguage();
+  const { openContactModal } = useContactModal();
   const isHindi = language === 'HI';
 
   // 10 Social Media Links matching user screenshot in exact order and colors
@@ -214,18 +216,35 @@ export default function Footer() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-y-4 gap-x-6 lg:gap-x-8">
             {FOOTER_COLUMNS.map((column) => (
               <div key={column.colId} className="flex flex-col space-y-3 sm:space-y-3.5">
-                {column.items.map((item) => (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    className="group inline-flex items-center gap-1.5 text-white/95 hover:text-amber-300 font-semibold text-[13px] sm:text-[13.5px] tracking-wide transition-colors cursor-pointer w-fit"
-                  >
-                    <span>{isHindi ? item.labelHi : item.label}</span>
-                    {item.hasCaret && (
-                      <ChevronDown className="w-3.5 h-3.5 text-white/80 group-hover:text-amber-300 transition-transform group-hover:translate-y-0.5 stroke-[2.5]" />
-                    )}
-                  </Link>
-                ))}
+                {column.items.map((item) => {
+                  if (item.href === '#help-support') {
+                    return (
+                      <button
+                        key={item.label}
+                        type="button"
+                        onClick={openContactModal}
+                        className="group inline-flex items-center gap-1.5 text-white/95 hover:text-amber-300 font-semibold text-[13px] sm:text-[13.5px] tracking-wide transition-colors cursor-pointer w-fit text-left"
+                      >
+                        <span>{isHindi ? item.labelHi : item.label}</span>
+                        {item.hasCaret && (
+                          <ChevronDown className="w-3.5 h-3.5 text-white/80 group-hover:text-amber-300 transition-transform group-hover:translate-y-0.5 stroke-[2.5]" />
+                        )}
+                      </button>
+                    );
+                  }
+                  return (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      className="group inline-flex items-center gap-1.5 text-white/95 hover:text-amber-300 font-semibold text-[13px] sm:text-[13.5px] tracking-wide transition-colors cursor-pointer w-fit"
+                    >
+                      <span>{isHindi ? item.labelHi : item.label}</span>
+                      {item.hasCaret && (
+                        <ChevronDown className="w-3.5 h-3.5 text-white/80 group-hover:text-amber-300 transition-transform group-hover:translate-y-0.5 stroke-[2.5]" />
+                      )}
+                    </Link>
+                  );
+                })}
               </div>
             ))}
           </div>

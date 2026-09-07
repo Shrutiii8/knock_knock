@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useLanguage } from '@/context/LanguageContext';
+import { useContactModal } from '@/context/ContactModalContext';
 
 interface HeaderProps {
   onOpenMobileNav: () => void;
@@ -30,6 +31,7 @@ export default function Header({ onOpenMobileNav }: HeaderProps) {
   const router = useRouter();
   const { user, isLoggedIn, logout, openLoginModal } = useAuth();
   const { language, openLanguageModal, t } = useLanguage();
+  const { openContactModal } = useContactModal();
   const [accountDropdownOpen, setAccountDropdownOpen] = useState(false);
   const [profileSubmenuOpen, setProfileSubmenuOpen] = useState(false);
   const [isClickOpen, setIsClickOpen] = useState(false);
@@ -776,12 +778,13 @@ export default function Header({ onOpenMobileNav }: HeaderProps) {
             </a>
 
             {/* CONTACT US */}
-            <a 
-              href="#contact" 
-              className="h-[28px] flex items-center text-gray-900 hover:text-[#FB792B] border-b-2 border-transparent tracking-wider leading-none"
+            <button
+              type="button"
+              onClick={openContactModal}
+              className="h-[28px] flex items-center text-gray-900 hover:text-[#FB792B] border-b-2 border-transparent tracking-wider leading-none cursor-pointer"
             >
               {t('contactUs')}
-            </a>
+            </button>
           </nav>
         </div>
 
