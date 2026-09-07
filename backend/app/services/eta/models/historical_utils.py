@@ -522,6 +522,18 @@ class HistoryRepository:
 
 # Map the module so that joblib can unpickle the BlendedExcelDelayRegressor
 import sys
+import types
 sys.modules['treta_eta'] = type('treta_eta', (), {})()
 sys.modules['treta_eta.src'] = type('treta_eta.src', (), {})()
 sys.modules['treta_eta.src.excel_feature_engineering'] = sys.modules[__name__]
+
+try:
+    import sklearn._loss._loss as _loss
+    class LeastSquaresError(_loss.CyHalfSquaredError):
+        pass
+    gb_losses = types.ModuleType('sklearn.ensemble._gb_losses')
+    gb_losses.LeastSquaresError = LeastSquaresError
+    sys.modules['sklearn.ensemble._gb_losses'] = gb_losses
+except Exception:
+    pass
+

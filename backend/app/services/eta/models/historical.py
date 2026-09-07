@@ -42,11 +42,22 @@ class HistoricalETAModel(ETAModel):
 
         if os.path.exists(delay_path):
             self.delay_model = joblib.load(delay_path)
+            self._fix_model_loss(self.delay_model)
         if os.path.exists(ontime_path):
             self.ontime_model = joblib.load(ontime_path)
+            self._fix_model_loss(self.ontime_model)
         if os.path.exists(metrics_path):
             with open(metrics_path, "r", encoding="utf-8") as f:
                 self.metrics = json.load(f)
+
+    def _fix_model_loss(self, model):
+        try:
+            from sklearn._loss.link import IdentityLink
+            if hasattr(model, 'model_gb') and hasattr(model.model_gb, '_loss'):
+                if not hasattr(model.model_gb._loss, 'link'):
+                    model.model_gb._loss.link = IdentityLink()
+        except Exception:
+            pass
 
     def predict(self, context: Dict[str, Any]) -> ETAContribution:
         """
