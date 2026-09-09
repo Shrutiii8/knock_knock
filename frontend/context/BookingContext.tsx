@@ -126,6 +126,27 @@ export function BookingProvider({ children }: { children: React.ReactNode }) {
   const selectTrainAndClass = (train: Train, cls: ClassCode) => {
     setSelectedTrain(train);
     setSelectedClass(cls);
+
+    const firstStop = train.route?.[0];
+    const lastStop = train.route?.[train.route.length - 1];
+
+    const fromCode = train.sourceStation || 'HWH';
+    const fromName = firstStop?.stationName 
+      ? `${firstStop.stationName.toUpperCase()} (${firstStop.stationCode})`
+      : fromCode;
+
+    const toCode = train.destinationStation || 'PNBE';
+    const toName = lastStop?.stationName 
+      ? `${lastStop.stationName.toUpperCase()} (${lastStop.stationCode})`
+      : toCode;
+
+    setSearchParamsState(prev => ({
+      ...prev,
+      from: fromCode,
+      fromName: fromName,
+      to: toCode,
+      toName: toName
+    }));
   };
 
   const addPassenger = (passenger?: Partial<Passenger>) => {

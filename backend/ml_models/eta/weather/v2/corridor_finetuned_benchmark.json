@@ -1,0 +1,100 @@
+{
+  "model_version": "v2.0-finetuned-7corridors",
+  "algorithm": "HistGradientBoostingRegressor",
+  "features_count": 28,
+  "features": [
+    "rainfall_1h",
+    "rainfall_24h",
+    "visibility_m",
+    "wind_speed_kmh",
+    "temperature_c",
+    "humidity_pct",
+    "pressure_hpa",
+    "cloud_cover_pct",
+    "weather_ahead_50km_sev",
+    "weather_ahead_100km_sev",
+    "weather_ahead_200km_sev",
+    "distance_to_weather_zone_km",
+    "rain_risk",
+    "fog_risk",
+    "visibility_risk",
+    "wind_risk",
+    "storm_risk",
+    "flood_risk",
+    "landslide_risk",
+    "heat_risk",
+    "overall_weather_risk",
+    "weather_exposure_score",
+    "distance_remaining_km",
+    "corridor_fog_stress",
+    "corridor_cyclone_stress",
+    "corridor_flood_landslide_stress",
+    "corridor_heat_stress",
+    "physics_tsr_delay_min"
+  ],
+  "timestamp": "2026-09-08T07:40:49.696466",
+  "overall_fine_tuned_metrics": {
+    "mae_minutes": 0.08,
+    "rmse_minutes": 0.96,
+    "medae_minutes": 0.01,
+    "p90_error_minutes": 0.09
+  },
+  "corridor_performance": {
+    "DELHI_HOWRAH": {
+      "samples": 2166,
+      "base_mae": 0.17,
+      "fine_mae": 0.07,
+      "rmse": 0.56,
+      "p90_margin_min": 0.09,
+      "improvement_pct": 57.73
+    },
+    "DELHI_MUMBAI": {
+      "samples": 2278,
+      "base_mae": 0.14,
+      "fine_mae": 0.06,
+      "rmse": 0.26,
+      "p90_margin_min": 0.07,
+      "improvement_pct": 59.3
+    },
+    "DELHI_CHENNAI": {
+      "samples": 2257,
+      "base_mae": 0.17,
+      "fine_mae": 0.09,
+      "rmse": 1.19,
+      "p90_margin_min": 0.08,
+      "improvement_pct": 45.91
+    },
+    "DELHI_GUWAHATI": {
+      "samples": 2238,
+      "base_mae": 0.15,
+      "fine_mae": 0.06,
+      "rmse": 0.29,
+      "p90_margin_min": 0.09,
+      "improvement_pct": 59.62
+    },
+    "MUMBAI_CHENNAI": {
+      "samples": 2222,
+      "base_mae": 0.2,
+      "fine_mae": 0.11,
+      "rmse": 1.92,
+      "p90_margin_min": 0.1,
+      "improvement_pct": 45.61
+    },
+    "MUMBAI_HOWRAH": {
+      "samples": 2144,
+      "base_mae": 0.14,
+      "fine_mae": 0.06,
+      "rmse": 0.45,
+      "p90_margin_min": 0.08,
+      "improvement_pct": 55.86
+    },
+    "CHENNAI_HOWRAH": {
+      "samples": 2248,
+      "base_mae": 0.17,
+      "fine_mae": 0.1,
+      "rmse": 0.85,
+      "p90_margin_min": 0.08,
+      "improvement_pct": 40.28
+    }
+  }
+}

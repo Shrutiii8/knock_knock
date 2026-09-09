@@ -131,8 +131,16 @@ export default function BookingPage() {
         selectedClass={classCodeToUse}
         quota={searchParams.quota}
         journeyDate={searchParams.date}
-        fromStationName={searchParams.fromName || searchParams.from}
-        toStationName={searchParams.toName || searchParams.to}
+        fromStationName={
+          trainToUse.route?.[0]?.stationName 
+            ? `${trainToUse.route[0].stationName.toUpperCase()} (${trainToUse.sourceStation})`
+            : (searchParams.fromName || searchParams.from)
+        }
+        toStationName={
+          trainToUse.route?.[trainToUse.route.length - 1]?.stationName
+            ? `${trainToUse.route[trainToUse.route.length - 1].stationName.toUpperCase()} (${trainToUse.destinationStation})`
+            : (searchParams.toName || searchParams.to)
+        }
       />
 
       {/* Main Two-Column Layout */}

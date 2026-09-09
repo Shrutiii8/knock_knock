@@ -59,3 +59,6 @@ class ETAContextRequest(BaseModel):
     is_live: bool = False
     data_freshness: str = ""
     departure_date: str = ""
+    weather: Optional[Dict[str, Any]] = None
+
+    model_config = {"extra": "allow"}

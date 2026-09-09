@@ -51,10 +51,24 @@ def parse_arrival_and_duration(dep_str: Any, arr_str: Any) -> Tuple[int, int, in
 def parse_operating_days(days_str: Any) -> Tuple[int, int, int]:
     """
     Parses 'Days of Departure' into (days_per_week_frequency, is_daily_service, operates_on_weekend).
+    Handles strings, lists, or missing values safely.
     """
-    if pd.isna(days_str):
+    if days_str is None:
         return 7, 1, 1
+
+    if isinstance(days_str, (list, tuple, set)):
+        if len(days_str) == 7:
+            return 7, 1, 1
+        elif len(days_str) == 0:
+            return 7, 1, 1
+        else:
+            is_wknd = 1 if any("sat" in str(d).lower() or "sun" in str(d).lower() for d in days_str) else 0
+            return max(1, len(days_str)), 0, is_wknd
+
     s = str(days_str).lower().strip()
+    if not s or s == "none" or s == "nan":
+        return 7, 1, 1
+
     if "daily except" in s:
         return 6, 0, 1
     elif "daily" in s:
@@ -520,7 +534,137 @@ class HistoryRepository:
         """Returns global benchmark and day-of-week stats."""
         return self._temporal_profiles
 
-# Map the module so that joblib can unpickle the BlendedExcelDelayRegressor
+
+HISTORICAL_V2_FEATURE_COLS = [
+    "total_distance_km",
+    "num_scheduled_stops",
+    "scheduled_duration_minutes",
+    "scheduled_avg_speed_kmh",
+    "stop_density_per_100km",
+    "circuitous_ratio",
+    "operating_days_per_week",
+    "is_daily_service",
+    "operates_on_weekend",
+    "max_speed_kmh",
+    "loco_horsepower",
+    "power_to_speed_ratio",
+    "soil_hazard_score",
+    "gradient_difficulty_score",
+    "train_priority_rank"
+]
+
+
+def soil_hazard_score_v2(val: Any) -> float:
+    s = str(val).lower()
+    if "rock" in s or "basalt" in s or "ghat" in s:
+        return 0.85
+    elif "black cotton" in s or "clay" in s or "laterite" in s:
+        return 0.55
+    elif "alluvium" in s or "alluvial" in s or "silt" in s:
+        return 0.25
+    return 0.35
+
+
+def gradient_score_v2(val: Any) -> float:
+    s = str(val).lower()
+    if "ghat" in s or "steep" in s or "1:37" in s or "1:50" in s:
+        return 0.90
+    elif "moderate" in s or "undulat" in s or "plateau" in s:
+        return 0.50
+    elif "gentle" in s or "mild" in s:
+        return 0.25
+    return 0.15
+
+
+def priority_rank_v2(val: Any) -> float:
+    s = str(val).upper()
+    if "RAJDHANI" in s or "SHATABDI" in s or "VANDE BHARAT" in s:
+        return 1.0
+    elif "SUPERFAST" in s or "SF" in s:
+        return 2.0
+    elif "EXPRESS" in s or "MAIL" in s:
+        return 3.0
+    return 4.0
+
+
+def parse_max_speed_v2(val: Any) -> float:
+    m = re.search(r"(\d{2,3})", str(val))
+    return float(m.group(1)) if m else 110.0
+
+
+def parse_loco_hp_v2(val: Any) -> float:
+    m = re.search(r"(\d{3,5})\s*(?:HP|hp)", str(val))
+    if m:
+        return float(m.group(1))
+    s = str(val).upper()
+    if "WAP-7" in s or "WAG-9" in s:
+        return 6000.0
+    elif "WAP-4" in s or "WAP-5" in s:
+        return 5000.0
+    elif "WDP-4" in s or "WDG-4" in s:
+        return 4500.0
+    return 4000.0
+
+
+def extract_v2_features(context: Dict[str, Any]) -> pd.DataFrame:
+    """
+    Transforms an ETA context dictionary into a 15-feature matrix
+    compatible with the Kaggle-trained V2 HistGradientBoosting models.
+    """
+    dist_km = float(context.get("distance_km") or context.get("distanceKm") or context.get("total_distance_km") or 450.0)
+    dist_km = max(30.0, dist_km)
+
+    stn_str = context.get("stations_stopped", "")
+    if stn_str:
+        num_stops = len([s.strip() for s in str(stn_str).split(",") if s.strip()])
+    else:
+        num_stops = int(context.get("num_scheduled_stops") or 10)
+    num_stops = max(1, num_stops)
+
+    dep_h, dep_m, dep_tot = parse_departure_time(context.get("departure_time", "00:00"))
+    arr_h, arr_m, day_off, dur_calc = parse_arrival_and_duration(
+        context.get("departure_time", "00:00"),
+        context.get("arrival_time", "00:00")
+    )
+    sch_duration = float(context.get("scheduled_duration_minutes") or dur_calc)
+    sch_duration = max(30.0, sch_duration)
+
+    sch_avg_speed = round(dist_km / (sch_duration / 60.0), 2)
+    stop_density = round((num_stops / dist_km) * 100.0, 2)
+    circuitous = float(context.get("circuitous_ratio", 1.15))
+
+    days_freq, is_daily, operates_weekend = parse_operating_days(context.get("days_of_departure", "Daily"))
+
+    max_speed = parse_max_speed_v2(context.get("max_coach_speed_kmh", 110.0))
+    loco_hp = parse_loco_hp_v2(context.get("locomotive_power", "WAP4"))
+    p2s = round(loco_hp / max_speed, 2)
+
+    soil_score = soil_hazard_score_v2(context.get("soil_type", "Alluvial"))
+    grad_score = gradient_score_v2(context.get("incline_gradient", "Flat"))
+    prio_rank = priority_rank_v2(context.get("train_type", "EXPRESS"))
+
+    row = {
+        "total_distance_km": float(dist_km),
+        "num_scheduled_stops": float(num_stops),
+        "scheduled_duration_minutes": float(sch_duration),
+        "scheduled_avg_speed_kmh": float(sch_avg_speed),
+        "stop_density_per_100km": float(stop_density),
+        "circuitous_ratio": float(circuitous),
+        "operating_days_per_week": float(days_freq),
+        "is_daily_service": float(is_daily),
+        "operates_on_weekend": float(operates_weekend),
+        "max_speed_kmh": float(max_speed),
+        "loco_horsepower": float(loco_hp),
+        "power_to_speed_ratio": float(p2s),
+        "soil_hazard_score": float(soil_score),
+        "gradient_difficulty_score": float(grad_score),
+        "train_priority_rank": float(prio_rank)
+    }
+
+    return pd.DataFrame([row])[HISTORICAL_V2_FEATURE_COLS]
+
+
+# Map the module so that joblib can unpickle the BlendedExcelDelayRegressor & HistGradientBoosting models
 import sys
 import types
 sys.modules['treta_eta'] = type('treta_eta', (), {})()
@@ -528,12 +672,17 @@ sys.modules['treta_eta.src'] = type('treta_eta.src', (), {})()
 sys.modules['treta_eta.src.excel_feature_engineering'] = sys.modules[__name__]
 
 try:
-    import sklearn._loss._loss as _loss
-    class LeastSquaresError(_loss.CyHalfSquaredError):
+    import sklearn._loss._loss as _loss_mod
+    if not hasattr(_loss_mod, 'CyHalfSquaredError'):
+        _loss_mod.CyHalfSquaredError = getattr(_loss_mod, 'HalfSquaredError', None)
+    sys.modules['_loss'] = _loss_mod
+
+    class LeastSquaresError(getattr(_loss_mod, 'CyHalfSquaredError', object)):
         pass
     gb_losses = types.ModuleType('sklearn.ensemble._gb_losses')
     gb_losses.LeastSquaresError = LeastSquaresError
     sys.modules['sklearn.ensemble._gb_losses'] = gb_losses
 except Exception:
     pass
+
 

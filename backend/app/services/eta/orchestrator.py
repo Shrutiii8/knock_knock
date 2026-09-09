@@ -19,7 +19,7 @@ class ETAOrchestrator:
         """
         Initializes and registers enabled ETA models.
         """
-        # Load only the historical model for now.
+        # Register Historical ETA model (V2 default)
         try:
             from app.services.eta.models.historical import HistoricalETAModel
             self.models.append(HistoricalETAModel())
@@ -27,9 +27,13 @@ class ETAOrchestrator:
         except Exception as e:
             logger.error(f"Failed to load HistoricalETAModel: {str(e)}")
             
-        # Future models would be added here:
-        # self.models.append(WeatherETAModel())
-        # self.models.append(SpeedRestrictionETAModel())
+        # Register Weather ETA model (V2 fine-tuned default)
+        try:
+            from app.services.eta.models.weather import WeatherETAModel
+            self.models.append(WeatherETAModel())
+            logger.info("Registered WeatherETAModel successfully.")
+        except Exception as e:
+            logger.error(f"Failed to load WeatherETAModel: {str(e)}")
         
     def predict(self, context: Dict[str, Any]) -> Optional[ETAPrediction]:
         """

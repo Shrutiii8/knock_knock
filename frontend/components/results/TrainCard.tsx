@@ -47,8 +47,11 @@ export default function TrainCard({ train, searchDate = 'Sun, 06 Sep' }: TrainCa
   // Format Departure & Arrival display
   const depTime = train.departureTime;
   const arrTime = train.arrivalTime;
-  const depStation = train.sourceStation === 'HWH' ? 'HOWRAH JN' : (train.route[0]?.stationName?.toUpperCase() || train.sourceStation);
-  const arrStation = train.destinationStation === 'RNC' ? 'RANCHI' : (train.route[train.route.length - 1]?.stationName?.toUpperCase() || train.destinationStation);
+  const firstRouteStation = train.route && train.route.length > 0 ? train.route[0]?.stationName?.toUpperCase() : null;
+  const lastRouteStation = train.route && train.route.length > 0 ? train.route[train.route.length - 1]?.stationName?.toUpperCase() : null;
+
+  const depStation = firstRouteStation || (train.sourceStation === 'HWH' ? 'HOWRAH JN' : train.sourceStation);
+  const arrStation = lastRouteStation || (train.destinationStation === 'RNC' ? 'RANCHI' : train.destinationStation);
 
   // Check if arrival is next day (e.g., Kriya Yoga Exp arrives 05:40 on Mon, 07 Sep)
   const isNextDay = train.trainNumber === '18615' || (parseInt(arrTime.split(':')[0], 10) < parseInt(depTime.split(':')[0], 10));

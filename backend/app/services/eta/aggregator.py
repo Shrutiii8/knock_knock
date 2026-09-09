@@ -17,9 +17,16 @@ class ETAAggregator:
         factors = []
         components = []
         
+        active_count = 0
         for c in contributions:
             total_delay += c.delay_minutes
-            weighted_confidence_sum += c.confidence
+            if c.metadata.get("available", True):
+                weighted_confidence_sum += c.confidence
+                active_count += 1
+            else:
+                # Still include confidence if no active models count
+                weighted_confidence_sum += c.confidence
+                
             if c.reason:
                 factors.append(f"[{c.model_name}] {c.reason}")
                 
@@ -33,8 +40,9 @@ class ETAAggregator:
             if c.metadata and "major_delay_factors" in c.metadata:
                 factors.extend(c.metadata["major_delay_factors"])
                 
-        # Simple average confidence for now (could be weighted later)
-        final_confidence = weighted_confidence_sum / max(len(contributions), 1)
+        # Average confidence across available models
+        denom = active_count if active_count > 0 else max(len(contributions), 1)
+        final_confidence = weighted_confidence_sum / denom
         
         # Calculate predicted arrival times
         # Context must contain scheduled departure, scheduled arrival, and departure_date

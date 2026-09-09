@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useMemo, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { Train, ClassCode, QuotaCode } from '@/types';
+import { useBooking } from '@/context/BookingContext';
 import SearchResultsTopBar from '@/components/results/SearchResultsTopBar';
 import FilterSidebar, { FilterState } from '@/components/results/FilterSidebar';
 import SortBar, { SortOption } from '@/components/results/SortBar';
@@ -12,14 +13,15 @@ import { QUOTAS } from '@/lib/constants';
 
 function SearchResultsContent() {
   const router = useRouter();
-  const searchParams = useSearchParams();
+  const searchParamsFromUrl = useSearchParams();
+  const { setSearchParams } = useBooking();
 
-  // Defaults match the user's screenshot: HOWRAH JN -> RANCHI on Sun, 06 Sep 2026
-  const from = searchParams.get('from') || 'HWH';
-  const to = searchParams.get('to') || 'RNC';
-  const date = searchParams.get('date') || '2026-09-06';
-  const quota = (searchParams.get('quota') || 'GN') as QuotaCode;
-  const classCode = searchParams.get('classCode') || 'ALL';
+  // Defaults match the user's search
+  const from = searchParamsFromUrl.get('from') || 'HWH';
+  const to = searchParamsFromUrl.get('to') || 'RNC';
+  const date = searchParamsFromUrl.get('date') || '2026-09-06';
+  const quota = (searchParamsFromUrl.get('quota') || 'GN') as QuotaCode;
+  const classCode = searchParamsFromUrl.get('classCode') || 'ALL';
 
   const [loading, setLoading] = useState(true);
   const [trains, setTrains] = useState<Train[]>([]);
