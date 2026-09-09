@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Train, ClassCode, QuotaCode, Passenger, Booking } from '@/types';
-import { generatePNR, generateSeatAllocation, calculateBreakdown } from '@/lib/utils';
+import { generatePNR, generateSeatAllocation, calculateBreakdown, getLocalTodayDate } from '@/lib/utils';
 import { useToast } from './ToastContext';
 import { useAuth } from './AuthContext';
 
@@ -23,7 +23,7 @@ interface BookingContextType {
   setSearchParams: (params: Partial<BookingSearchParams>) => void;
   selectedTrain: Train | null;
   selectedClass: ClassCode | null;
-  selectTrainAndClass: (train: Train, cls: ClassCode) => void;
+  selectTrainAndClass: (train: Train, cls: ClassCode, journeyDate?: string) => void;
   passengers: Passenger[];
   setPassengers: React.Dispatch<React.SetStateAction<Passenger[]>>;
   addPassenger: (passenger?: Partial<Passenger>) => void;
@@ -63,7 +63,7 @@ export function BookingProvider({ children }: { children: React.ReactNode }) {
     fromName: 'HOWRAH JN - HWH',
     to: 'RNC',
     toName: 'RANCHI - RNC (HATI)',
-    date: new Date().toISOString().split('T')[0],
+    date: getLocalTodayDate(),
     quota: 'GN',
     acOnly: false,
     disabledConcession: false
@@ -119,13 +119,43 @@ export function BookingProvider({ children }: { children: React.ReactNode }) {
     }
   }, [isLoggedIn]);
 
+  // Restore selected train, class, and search params on reload
+  useEffect(() => {
+    try {
+      const storedTrain = localStorage.getItem('irctc_selected_train');
+      if (storedTrain) {
+        setSelectedTrain(JSON.parse(storedTrain));
+      }
+      const storedClass = localStorage.getItem('irctc_selected_class') as ClassCode | null;
+      if (storedClass) {
+        setSelectedClass(storedClass);
+      }
+      const storedParams = localStorage.getItem('irctc_search_params');
+      if (storedParams) {
+        setSearchParamsState(JSON.parse(storedParams));
+      }
+    } catch (e) {
+      console.error("Failed to restore booking state from localStorage", e);
+    }
+  }, []);
+
   const setSearchParams = (params: Partial<BookingSearchParams>) => {
-    setSearchParamsState(prev => ({ ...prev, ...params }));
+    setSearchParamsState(prev => {
+      const updated = { ...prev, ...params };
+      try {
+        localStorage.setItem('irctc_search_params', JSON.stringify(updated));
+      } catch (e) {}
+      return updated;
+    });
   };
 
-  const selectTrainAndClass = (train: Train, cls: ClassCode) => {
+  const selectTrainAndClass = (train: Train, cls: ClassCode, journeyDate?: string) => {
     setSelectedTrain(train);
     setSelectedClass(cls);
+    try {
+      localStorage.setItem('irctc_selected_train', JSON.stringify(train));
+      localStorage.setItem('irctc_selected_class', cls);
+    } catch (e) {}
 
     const firstStop = train.route?.[0];
     const lastStop = train.route?.[train.route.length - 1];
@@ -140,13 +170,20 @@ export function BookingProvider({ children }: { children: React.ReactNode }) {
       ? `${lastStop.stationName.toUpperCase()} (${lastStop.stationCode})`
       : toCode;
 
-    setSearchParamsState(prev => ({
-      ...prev,
-      from: fromCode,
-      fromName: fromName,
-      to: toCode,
-      toName: toName
-    }));
+    setSearchParamsState(prev => {
+      const updated = {
+        ...prev,
+        from: fromCode,
+        fromName: fromName,
+        to: toCode,
+        toName: toName,
+        ...(journeyDate ? { date: journeyDate } : {})
+      };
+      try {
+        localStorage.setItem('irctc_search_params', JSON.stringify(updated));
+      } catch (e) {}
+      return updated;
+    });
   };
 
   const addPassenger = (passenger?: Partial<Passenger>) => {

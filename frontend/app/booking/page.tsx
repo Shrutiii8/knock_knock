@@ -11,6 +11,7 @@ import ContactDetailsForm from '@/components/booking/ContactDetailsForm';
 import FareSummarySidebar from '@/components/booking/FareSummarySidebar';
 import { ArrowLeft, ShieldAlert } from 'lucide-react';
 import Link from 'next/link';
+import { getLocalTodayDate } from '@/lib/utils';
 
 export default function BookingPage() {
   const router = useRouter();
@@ -80,13 +81,23 @@ export default function BookingPage() {
     router.push('/payment');
   };
 
-  const { isLoggedIn, openLoginModal } = useAuth();
+  const { isLoggedIn, isAuthLoading, openLoginModal } = useAuth();
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (!isAuthLoading && !isLoggedIn) {
+      router.replace('/');
       openLoginModal('/booking');
     }
-  }, [isLoggedIn, openLoginModal]);
+  }, [isAuthLoading, isLoggedIn, openLoginModal, router]);
+
+  if (isAuthLoading) {
+    return (
+      <div className="py-20 text-center select-none space-y-3 max-w-md mx-auto">
+        <div className="w-8 h-8 border-3 border-[#0A3D62] border-t-transparent rounded-full animate-spin mx-auto" />
+        <p className="text-xs font-semibold text-gray-500">Verifying session...</p>
+      </div>
+    );
+  }
 
   if (!isLoggedIn) {
     return (
@@ -130,7 +141,7 @@ export default function BookingPage() {
         train={trainToUse}
         selectedClass={classCodeToUse}
         quota={searchParams.quota}
-        journeyDate={searchParams.date}
+        journeyDate={searchParams.date || getLocalTodayDate()}
         fromStationName={
           trainToUse.route?.[0]?.stationName 
             ? `${trainToUse.route[0].stationName.toUpperCase()} (${trainToUse.sourceStation})`

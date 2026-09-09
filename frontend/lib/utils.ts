@@ -16,14 +16,56 @@ export function formatCurrency(amount: number): string {
   }).format(amount);
 }
 
+export function getLocalTodayDate(): string {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+export function parseDateSafe(dateString: string): Date {
+  if (!dateString) return new Date();
+  const parts = dateString.split('-');
+  if (parts.length === 3) {
+    const year = parseInt(parts[0], 10);
+    const month = parseInt(parts[1], 10);
+    const day = parseInt(parts[2], 10);
+    if (!isNaN(year) && !isNaN(month) && !isNaN(day)) {
+      return new Date(year, month - 1, day, 12, 0, 0);
+    }
+  }
+  return new Date(dateString);
+}
+
+export function addDays(dateString: string, days: number): string {
+  if (!dateString) return getLocalTodayDate();
+  const base = parseDateSafe(dateString);
+  base.setDate(base.getDate() + days);
+  const year = base.getFullYear();
+  const month = String(base.getMonth() + 1).padStart(2, '0');
+  const day = String(base.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
 export function formatDate(dateString: string): string {
   if (!dateString) return '';
-  const date = new Date(dateString);
+  const date = parseDateSafe(dateString);
   return date.toLocaleDateString('en-IN', {
     weekday: 'short',
     day: '2-digit',
     month: 'short',
     year: 'numeric'
+  });
+}
+
+export function formatDateShort(dateString: string): string {
+  if (!dateString) return '';
+  const date = parseDateSafe(dateString);
+  return date.toLocaleDateString('en-IN', {
+    weekday: 'short',
+    day: '2-digit',
+    month: 'short'
   });
 }
 
@@ -81,7 +123,7 @@ export function calculateBreakdown(
   const rawBase = baseFarePerPerson * passengerCount;
   const resFee = IRCTC_CHARGES.RESERVATION_FEE * passengerCount;
   const sfCharge = IRCTC_CHARGES.SUPERFAST_CHARGE * passengerCount;
-  
+
   let tatkalCharge = 0;
   if (quota === 'TQ' || quota === 'PT') {
     tatkalCharge = Math.round(rawBase * IRCTC_CHARGES.TATKAL_CHARGE_PERCENTAGE);
@@ -90,8 +132,8 @@ export function calculateBreakdown(
   const isAcClass = ['1A', '2A', '3A', '3E', 'CC', 'EC'].includes(classCode);
   const gst = isAcClass ? Math.round((rawBase + resFee + sfCharge + tatkalCharge) * IRCTC_CHARGES.GST_RATE_AC) : 0;
   const insurance = hasInsurance ? +(IRCTC_CHARGES.TRAVEL_INSURANCE_PER_PASSENGER * passengerCount).toFixed(2) : 0;
-  const convenienceFee = paymentType === 'UPI' 
-    ? IRCTC_CHARGES.CONVENIENCE_FEE_UPI 
+  const convenienceFee = paymentType === 'UPI'
+    ? IRCTC_CHARGES.CONVENIENCE_FEE_UPI
     : IRCTC_CHARGES.CONVENIENCE_FEE_NETBANKING;
 
   const total = Math.round(rawBase + resFee + sfCharge + tatkalCharge + gst + insurance + convenienceFee);

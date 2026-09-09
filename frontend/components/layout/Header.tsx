@@ -435,7 +435,7 @@ export default function Header({ onOpenMobileNav }: HeaderProps) {
                       </div>
 
                       <Link
-                        href="/#feedback"
+                        href="/feedback"
                         onClick={() => {
                           setAccountDropdownOpen(false);
                           setIsClickOpen(false);
@@ -724,12 +724,12 @@ export default function Header({ onOpenMobileNav }: HeaderProps) {
             </div>
 
             {/* MEALS (Text matching screenshot, aligned with border-b-2 transparent) */}
-            <a
-              href="#meals"
+            <Link
+              href="/meals"
               className="h-[28px] flex items-center text-gray-900 hover:text-[#FB792B] border-b-2 border-transparent tracking-wider transition-colors leading-none"
             >
               {t('meals')}
-            </a>
+            </Link>
 
             {/* Upto 10% Cashback (Solid Dark Navy Block Button matching screenshot) */}
             <button
@@ -763,19 +763,19 @@ export default function Header({ onOpenMobileNav }: HeaderProps) {
 
             {/* ALERTS */}
             <Link 
-              href="/pnr-status" 
+              href="/alerts" 
               className="h-[28px] flex items-center text-gray-900 hover:text-[#FB792B] border-b-2 border-transparent tracking-wider leading-none"
             >
               {t('alerts')}
             </Link>
 
             {/* OTHER SERVICES */}
-            <a 
-              href="#services" 
+            <Link 
+              href="/other-services" 
               className="h-[28px] flex items-center text-gray-900 hover:text-[#FB792B] border-b-2 border-transparent tracking-wider leading-none"
             >
               {t('otherServices')}
-            </a>
+            </Link>
 
             {/* CONTACT US */}
             <button

@@ -48,7 +48,7 @@ export default function ContactUsModal() {
 
         {/* Modal Scrollable Body */}
         <div className="p-5 sm:p-7 overflow-y-auto text-[#111827] text-[13.5px] sm:text-[14px] leading-relaxed select-text space-y-4 font-sans">
-          
+
           {/* Main Headline */}
           <h3 className="text-[18px] sm:text-[21px] font-serif font-bold text-[#111827] leading-snug">
             For Any Queries Related to Railway Tickets Booked via BRCTC
@@ -160,7 +160,7 @@ export default function ContactUsModal() {
             <h4 className="font-bold text-[#111827] text-[14.5px]">
               For complaint regarding BRCTC Loyalty credit card, kindly contact as below.
             </h4>
-            
+
             <div className="space-y-1.5 pt-1 text-[13px] sm:text-[13.5px]">
               <p className="font-serif">
                 LOYALTY CREDIT CARD:{' '}

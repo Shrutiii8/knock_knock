@@ -5,15 +5,12 @@ import { Train } from '@/types';
 import { formatDate } from '@/lib/utils';
 import { 
   Clock, 
-  MapPin, 
   Calendar, 
   CheckCircle2, 
   AlertTriangle, 
   X, 
   RefreshCw,
-  Sparkles,
-  Info,
-  ShieldCheck
+  Info
 } from 'lucide-react';
 
 export interface EtaInfo {
@@ -62,7 +59,6 @@ export default function EtaModal({
   if (!isOpen || !etaData) return null;
 
   const isOnTime = etaData.delayMinutes === 0;
-  const confidencePct = etaData.confidence ? Math.round(etaData.confidence * 100) : null;
 
   return (
     <div
@@ -83,11 +79,8 @@ export default function EtaModal({
               <Clock className="w-4 h-4 text-[#FB792B]" />
             </div>
             <div>
-              <h3 id="eta-modal-title" className="text-sm font-bold tracking-tight flex items-center gap-1.5">
+              <h3 id="eta-modal-title" className="text-sm font-bold tracking-tight">
                 Live Estimated Time of Arrival (ETA)
-                <span className="bg-amber-400 text-slate-900 text-[10px] font-extrabold px-1.5 py-0.2 rounded inline-flex items-center gap-0.5">
-                  <Sparkles className="w-2.5 h-2.5 fill-slate-900" /> ML Powered
-                </span>
               </h3>
               <p className="text-[11px] text-blue-200">
                 {train.trainNumber} - {train.trainName}
@@ -149,75 +142,28 @@ export default function EtaModal({
                   </>
                 )}
               </div>
-
-              {confidencePct !== null && (
-                <div className="text-[10px] font-bold text-gray-600 bg-white/80 px-2 py-0.5 rounded border border-gray-200 flex items-center gap-1 mt-0.5">
-                  <ShieldCheck className="w-3 h-3 text-blue-600" />
-                  <span>{confidencePct}% Model Confidence</span>
-                </div>
-              )}
             </div>
           </div>
 
           {/* Model Confidence Interval Range (if present) */}
           {etaData.confidenceInterval && (
-            <div className="bg-blue-50/70 border border-blue-200 p-3 rounded-md flex items-center justify-between text-[11px]">
-              <div className="flex items-center gap-2">
+            <div className="bg-blue-50/90 border border-blue-200 p-3.5 rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 shadow-2xs">
+              <div className="flex items-center gap-2.5 min-w-0">
                 <Info className="w-4 h-4 text-blue-700 shrink-0" />
-                <div>
+                <div className="flex items-baseline flex-wrap gap-2 text-xs">
                   <span className="font-bold text-blue-950">Predicted Arrival Window:</span>
-                  <span className="text-blue-900 font-mono ml-1 font-semibold">
-                    {etaData.confidenceInterval.eta_lower} – {etaData.confidenceInterval.eta_upper} IST
+                  <span className="text-sm font-extrabold text-blue-950 font-mono tracking-tight">
+                    {etaData.confidenceInterval.eta_lower} – {etaData.confidenceInterval.eta_upper} <span className="text-xs font-bold text-blue-800">IST</span>
                   </span>
                 </div>
               </div>
-              <span className="text-[10px] font-medium text-blue-700 bg-blue-100 px-2 py-0.5 rounded border border-blue-200 font-mono">
-                ±{Math.round(etaData.confidenceInterval.margin_minutes)}m margin
-              </span>
+              <div className="shrink-0 self-start sm:self-auto">
+                <span className="inline-flex items-center text-xs font-semibold text-white bg-[#0A3D62] px-2.5 py-1 rounded-md font-sans shadow-xs whitespace-nowrap">
+                  ±{Math.round(etaData.confidenceInterval.margin_minutes)}m margin
+                </span>
+              </div>
             </div>
           )}
-
-          {/* Major Delay Factors & ML Drivers */}
-          {etaData.majorDelayFactors && etaData.majorDelayFactors.length > 0 && (
-            <div className="bg-slate-50 border border-slate-200 rounded-md p-3.5 space-y-2">
-              <div className="text-[11px] font-bold text-slate-700 uppercase tracking-wide flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                <span>ML Model Delay Insights & Factors</span>
-              </div>
-              <ul className="space-y-1.5">
-                {etaData.majorDelayFactors.map((factor, idx) => {
-                  // Clean up category prefixes like [historical]
-                  const cleanFactor = factor.replace(/^\[.*?\]\s*/, '');
-                  return (
-                    <li key={idx} className="flex items-start gap-2 text-[11px] text-slate-700 leading-snug">
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-1 shrink-0" />
-                      <span>{cleanFactor}</span>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          )}
-
-          {/* Expected Platform */}
-          <div className="bg-gray-50 p-3 rounded-md border border-gray-200 flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-full bg-blue-100/70 flex items-center justify-center shrink-0">
-                <MapPin className="w-4 h-4 text-[#0A3D62]" />
-              </div>
-              <div>
-                <div className="text-[10px] uppercase font-bold text-gray-500">
-                  Expected Arrival Platform
-                </div>
-                <div className="text-xs text-gray-600 mt-0.5">
-                  At {toStationName}
-                </div>
-              </div>
-            </div>
-            <div className="text-sm font-extrabold text-gray-900 bg-white px-3 py-1.5 rounded border border-gray-200 shadow-2xs font-mono">
-              Platform {etaData.platform}
-            </div>
-          </div>
 
           {/* Journey Date & Route summary */}
           <div className="flex items-center justify-between text-[11px] text-gray-500 pt-1 border-t border-gray-100">

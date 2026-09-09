@@ -48,6 +48,7 @@ function AccountContent() {
   const { 
     user, 
     isLoggedIn, 
+    isAuthLoading,
     openLoginModal, 
     walletBalance, 
     rechargeWallet, 
@@ -210,10 +211,20 @@ function AccountContent() {
   };
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (!isAuthLoading && !isLoggedIn) {
+      router.replace('/');
       openLoginModal('/account');
     }
-  }, [isLoggedIn, openLoginModal]);
+  }, [isAuthLoading, isLoggedIn, openLoginModal, router]);
+
+  if (isAuthLoading) {
+    return (
+      <div className="py-20 text-center select-none space-y-3 max-w-md mx-auto">
+        <div className="w-8 h-8 border-3 border-[#0A3D62] border-t-transparent rounded-full animate-spin mx-auto" />
+        <p className="text-xs font-semibold text-gray-500">Loading your account...</p>
+      </div>
+    );
+  }
 
   if (!isLoggedIn) {
     return (

@@ -183,7 +183,7 @@ function SearchResultsContent() {
 
   return (
     <div className="w-full bg-[#F5F5F5] min-h-screen select-none font-sans">
-      
+
       {/* 1. Top Search / Filter Header Bar */}
       <SearchResultsTopBar
         from={from}
@@ -199,7 +199,7 @@ function SearchResultsContent() {
       {/* 2. Main 2-Column Content Container */}
       <div className="max-w-[1380px] mx-auto px-4 sm:px-6 py-4">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
-          
+
           {/* Left Sidebar: Refine Results */}
           <aside className="lg:col-span-3 xl:col-span-3">
             <FilterSidebar
@@ -214,7 +214,7 @@ function SearchResultsContent() {
 
           {/* Right Main Column: Sort & Train Cards */}
           <section className="lg:col-span-9 xl:col-span-9 space-y-3">
-            
+
             {/* Sort & Results Banner */}
             <SortBar
               totalTrains={filteredAndSortedTrains.length}
@@ -241,9 +241,9 @@ function SearchResultsContent() {
             {!loading && filteredAndSortedTrains.length > 0 && (
               <div>
                 {filteredAndSortedTrains.map(train => (
-                  <TrainCard 
-                    key={train.trainNumber} 
-                    train={train} 
+                  <TrainCard
+                    key={train.trainNumber}
+                    train={train}
                     searchDate={dateFormattedShort}
                   />
                 ))}

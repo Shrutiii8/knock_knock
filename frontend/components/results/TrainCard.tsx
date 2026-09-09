@@ -40,8 +40,8 @@ export default function TrainCard({ train, searchDate = 'Sun, 06 Sep' }: TrainCa
   };
 
   // Determine if train is Vande Bharat for the blue bookmark corner tag
-  const isVandeBharat = 
-    train.trainName.toUpperCase().includes('VANDE BHARAT') || 
+  const isVandeBharat =
+    train.trainName.toUpperCase().includes('VANDE BHARAT') ||
     train.trainNumber === '20897';
 
   // Format Departure & Arrival display
@@ -62,20 +62,20 @@ export default function TrainCard({ train, searchDate = 'Sun, 06 Sep' }: TrainCa
 
   return (
     <div className="relative bg-white border border-gray-200 shadow-2xs hover:shadow-sm transition-shadow select-none mb-4">
-      
+
       {/* Blue Bookmark Corner Tag for Vande Bharat */}
       {isVandeBharat && (
-        <div 
+        <div
           className="absolute top-0 left-0 w-0 h-0 border-t-[20px] border-t-[#0074D9] border-r-[20px] border-r-transparent z-10"
           title="Vande Bharat Flagship Express"
         />
       )}
 
       <div className="p-4 sm:p-5 space-y-4">
-        
+
         {/* Row 1: Train Name & Number | Runs On | Train Schedule */}
         <div className="flex flex-wrap items-center justify-between gap-2 border-b border-gray-100 pb-2.5">
-          
+
           {/* Train Name and Number */}
           <h3 className="font-bold text-[14.5px] sm:text-[15.5px] text-gray-900 tracking-tight">
             {train.trainName.toUpperCase()} ({train.trainNumber})
@@ -112,7 +112,7 @@ export default function TrainCard({ train, searchDate = 'Sun, 06 Sep' }: TrainCa
 
         {/* Row 2: Timing Row (Departure | Duration Line | Arrival) */}
         <div className="flex items-center justify-between gap-2 py-1">
-          
+
           {/* Departure */}
           <div className="text-left flex items-baseline gap-2">
             <span className="font-bold text-[20px] sm:text-[22px] text-gray-900 font-sans tracking-tight">
@@ -197,11 +197,10 @@ export default function TrainCard({ train, searchDate = 'Sun, 06 Sep' }: TrainCa
             type="button"
             onClick={handleBookNow}
             disabled={!selectedClass}
-            className={`px-5 py-2 rounded-xs font-bold text-xs tracking-wider transition-colors select-none ${
-              selectedClass
+            className={`px-5 py-2 rounded-xs font-bold text-xs tracking-wider transition-colors select-none ${selectedClass
                 ? 'bg-[#FB792B] hover:bg-[#E65100] text-white cursor-pointer shadow-sm'
                 : 'bg-[#FBC4A2] text-white cursor-not-allowed'
-            }`}
+              }`}
           >
             Book Now
           </button>
@@ -226,7 +225,7 @@ export default function TrainCard({ train, searchDate = 'Sun, 06 Sep' }: TrainCa
               <h4 className="font-bold text-sm text-gray-900 uppercase">
                 {train.trainName} ({train.trainNumber}) Timetable Schedule
               </h4>
-              <button 
+              <button
                 type="button"
                 onClick={() => setShowScheduleModal(false)}
                 className="text-gray-400 hover:text-gray-600"
@@ -268,7 +267,7 @@ export default function TrainCard({ train, searchDate = 'Sun, 06 Sep' }: TrainCa
               <h4 className="font-bold text-sm text-gray-900 uppercase">
                 Availability on Alternate Dates ({train.trainNumber})
               </h4>
-              <button 
+              <button
                 type="button"
                 onClick={() => setShowOtherDatesModal(false)}
                 className="text-gray-400 hover:text-gray-600"

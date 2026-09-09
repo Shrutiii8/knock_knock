@@ -56,7 +56,7 @@ export default function FilterSidebar({
 
   const toggleClass = (code: ClassCode) => {
     const isSelected = filters.classes.includes(code);
-    const next = isSelected 
+    const next = isSelected
       ? filters.classes.filter(c => c !== code)
       : [...filters.classes, code];
     onChange({ ...filters, classes: next });
@@ -97,7 +97,7 @@ export default function FilterSidebar({
 
   return (
     <div className="bg-white rounded-none border border-gray-200 shadow-2xs divide-y divide-gray-200 text-gray-800 text-xs select-none">
-      
+
       {/* Top Header: Refine Results & Remove Filter */}
       <div className="p-3.5 flex items-center justify-between">
         <h3 className="font-bold text-[13px] text-gray-900 tracking-tight">Refine Results</h3>
@@ -122,7 +122,7 @@ export default function FilterSidebar({
             >
               Select All
             </button>
-            <button 
+            <button
               type="button"
               onClick={() => setClassCollapsed(!classCollapsed)}
               className="text-gray-400 hover:text-gray-600"
@@ -164,7 +164,7 @@ export default function FilterSidebar({
             >
               Select All
             </button>
-            <button 
+            <button
               type="button"
               onClick={() => setTypeCollapsed(!typeCollapsed)}
               className="text-gray-400 hover:text-gray-600"
@@ -213,7 +213,7 @@ export default function FilterSidebar({
             >
               Select All
             </button>
-            <button 
+            <button
               type="button"
               onClick={() => setDepTimeCollapsed(!depTimeCollapsed)}
               className="text-gray-400 hover:text-gray-600"
@@ -238,11 +238,10 @@ export default function FilterSidebar({
                     key={slot.id}
                     type="button"
                     onClick={() => toggleDepTimeSlot(slot.id)}
-                    className={`py-2 px-1 text-center rounded-xs transition-colors ${
-                      isSelected 
-                        ? 'bg-[#1C356C] text-white' 
+                    className={`py-2 px-1 text-center rounded-xs transition-colors ${isSelected
+                        ? 'bg-[#1C356C] text-white'
                         : 'bg-[#1C356C] text-white hover:bg-[#152954]'
-                    }`}
+                      }`}
                   >
                     <div className="text-[10px] font-bold tracking-tight">{slot.time}</div>
                     <div className="text-[11px] font-bold mt-0.5">{slot.label}</div>
@@ -282,7 +281,7 @@ export default function FilterSidebar({
             >
               Select All
             </button>
-            <button 
+            <button
               type="button"
               onClick={() => setArrTimeCollapsed(!arrTimeCollapsed)}
               className="text-gray-400 hover:text-gray-600"
@@ -307,11 +306,10 @@ export default function FilterSidebar({
                     key={slot.id}
                     type="button"
                     onClick={() => toggleArrTimeSlot(slot.id)}
-                    className={`py-2 px-1 text-center rounded-xs transition-colors ${
-                      isSelected 
-                        ? 'bg-[#1C356C] text-white' 
+                    className={`py-2 px-1 text-center rounded-xs transition-colors ${isSelected
+                        ? 'bg-[#1C356C] text-white'
                         : 'bg-[#1C356C] text-white hover:bg-[#152954]'
-                    }`}
+                      }`}
                   >
                     <div className="text-[10px] font-bold tracking-tight">{slot.time}</div>
                     <div className="text-[11px] font-bold mt-0.5">{slot.label}</div>
@@ -350,7 +348,7 @@ export default function FilterSidebar({
             >
               Select All
             </button>
-            <button 
+            <button
               type="button"
               onClick={() => setFromCollapsed(!fromCollapsed)}
               className="text-gray-400 hover:text-gray-600"
@@ -385,7 +383,7 @@ export default function FilterSidebar({
             >
               Select All
             </button>
-            <button 
+            <button
               type="button"
               onClick={() => setToCollapsed(!toCollapsed)}
               className="text-gray-400 hover:text-gray-600"

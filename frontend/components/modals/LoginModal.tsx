@@ -7,13 +7,20 @@ import { useAuth } from '@/context/AuthContext';
 
 export default function LoginModal() {
   const router = useRouter();
-  const { isLoginModalOpen, closeLoginModal, login } = useAuth();
+  const { isLoginModalOpen, closeLoginModal, login, isLoggedIn } = useAuth();
   
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [otpOption, setOtpOption] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
+
+  // Automatically close if user is already logged in
+  useEffect(() => {
+    if (isLoggedIn && isLoginModalOpen) {
+      closeLoginModal();
+    }
+  }, [isLoggedIn, isLoginModalOpen, closeLoginModal]);
 
   // Handle escape key to close
   useEffect(() => {
@@ -26,7 +33,7 @@ export default function LoginModal() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isLoginModalOpen, closeLoginModal]);
 
-  if (!isLoginModalOpen) return null;
+  if (!isLoginModalOpen || isLoggedIn) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

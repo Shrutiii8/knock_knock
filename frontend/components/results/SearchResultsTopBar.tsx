@@ -1,14 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
-import { 
-  Send, 
-  MapPin, 
-  Calendar as CalendarIcon, 
-  Briefcase, 
-  LayoutGrid, 
-  ArrowLeftRight, 
-  ChevronDown 
+import {
+  Send,
+  MapPin,
+  Calendar as CalendarIcon,
+  Briefcase,
+  LayoutGrid,
+  ArrowLeftRight,
+  ChevronDown
 } from 'lucide-react';
 import { QUOTAS, CLASSES } from '@/lib/constants';
 import { QuotaCode, ClassCode } from '@/types';
@@ -73,8 +73,8 @@ export default function SearchResultsTopBar({
   const toDisplay = toStation ? `${toStation.name.toUpperCase()} - ${toStation.code}` : currentTo;
 
   // Format date for display like 06/09/2026
-  const dateFormatted = currentDate.includes('-') 
-    ? currentDate.split('-').reverse().join('/') 
+  const dateFormatted = currentDate.includes('-')
+    ? currentDate.split('-').reverse().join('/')
     : currentDate;
 
   const currentQuotaObj = QUOTAS.find(q => q.code === currentQuota) || QUOTAS[0];
@@ -95,13 +95,13 @@ export default function SearchResultsTopBar({
   return (
     <div className="bg-[#213D77] text-white py-3 px-4 sm:px-6 shadow-md select-none">
       <form onSubmit={handleModifySearch} className="max-w-[1380px] mx-auto space-y-2.5">
-        
+
         {/* Top Controls Row */}
         <div className="flex items-center gap-2 flex-wrap xl:flex-nowrap">
-          
+
           {/* From Station Input */}
           <div className="relative flex-1 min-w-[200px]">
-            <div 
+            <div
               onClick={() => { setFromOpen(!fromOpen); setToOpen(false); setQuotaOpen(false); setClassOpen(false); }}
               className="bg-white text-gray-900 px-3 py-2 rounded-xs flex items-center gap-2 cursor-pointer shadow-2xs border border-gray-200"
             >
@@ -149,7 +149,7 @@ export default function SearchResultsTopBar({
 
           {/* To Station Input */}
           <div className="relative flex-1 min-w-[200px]">
-            <div 
+            <div
               onClick={() => { setToOpen(!toOpen); setFromOpen(false); setQuotaOpen(false); setClassOpen(false); }}
               className="bg-white text-gray-900 px-3 py-2 rounded-xs flex items-center gap-2 cursor-pointer shadow-2xs border border-gray-200"
             >

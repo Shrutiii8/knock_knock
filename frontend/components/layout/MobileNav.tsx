@@ -16,7 +16,10 @@ import {
   HelpCircle,
   Phone,
   ShieldCheck,
-  Globe
+  Globe,
+  UtensilsCrossed,
+  Bell,
+  Star
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useLanguage } from '@/context/LanguageContext';
@@ -155,6 +158,33 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
             >
               <Activity className="w-4 h-4 text-[#0A3D62]" />
               <span>Live Train Running Status</span>
+            </Link>
+
+            <Link
+              href="/meals"
+              onClick={onClose}
+              className={`flex items-center gap-3 px-4 py-2.5 hover:bg-gray-100 ${pathname === '/meals' ? 'text-[#0A3D62] font-bold bg-blue-50' : ''}`}
+            >
+              <UtensilsCrossed className="w-4 h-4 text-[#0A3D62]" />
+              <span>Meals & Catering</span>
+            </Link>
+
+            <Link
+              href="/alerts"
+              onClick={onClose}
+              className={`flex items-center gap-3 px-4 py-2.5 hover:bg-gray-100 ${pathname === '/alerts' ? 'text-[#0A3D62] font-bold bg-blue-50' : ''}`}
+            >
+              <Bell className="w-4 h-4 text-[#0A3D62]" />
+              <span>Alerts & Updates</span>
+            </Link>
+
+            <Link
+              href="/feedback"
+              onClick={onClose}
+              className={`flex items-center gap-3 px-4 py-2.5 hover:bg-gray-100 ${pathname === '/feedback' ? 'text-[#0A3D62] font-bold bg-blue-50' : ''}`}
+            >
+              <Star className="w-4 h-4 text-[#0A3D62]" />
+              <span>Feedback</span>
             </Link>
           </div>
 

@@ -47,7 +47,7 @@ export default function SelectedTrainBanner({
           departure_time: train.departureTime,
           arrival_time: train.arrivalTime,
           scheduled_arrival: train.arrivalTime,
-          days_of_departure: train.runningDays?.join(',') || 'Daily',
+          days_of_departure: 'Daily',
           train_type: train.trainType || 'EXPRESS',
           current_station: fromStationName,
           upcoming_stations: toStationName,
@@ -196,11 +196,10 @@ export default function SelectedTrainBanner({
               <div className="text-base font-extrabold text-gray-900 font-mono mt-0.5 flex items-baseline md:justify-end gap-2 flex-wrap">
                 <span>{train.arrivalTime}</span>
                 {etaData && (
-                  <span className={`text-[11px] font-sans font-bold px-1.5 py-0.5 rounded border inline-flex items-center gap-1 ${
-                    etaData.delayMinutes === 0 
-                      ? 'bg-emerald-50 text-emerald-700 border-emerald-300' 
+                  <span className={`text-[11px] font-sans font-bold px-1.5 py-0.5 rounded border inline-flex items-center gap-1 ${etaData.delayMinutes === 0
+                      ? 'bg-emerald-50 text-emerald-700 border-emerald-300'
                       : 'bg-amber-50 text-amber-700 border-amber-300'
-                  }`}>
+                    }`}>
                     <Clock className="w-3 h-3" />
                     <span>ETA: {etaData.estimatedArrival} ({etaData.delayMinutes === 0 ? 'On Time' : `+${etaData.delayMinutes}m`})</span>
                   </span>
